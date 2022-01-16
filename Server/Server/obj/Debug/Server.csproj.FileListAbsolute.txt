@@ -1,0 +1,7 @@
+C:\Users\benwi\OneDrive - BBS Papenburg TW\Kindersicherungssoftware\Testing\Server\Server\Server\bin\Debug\Server.exe.config
+C:\Users\benwi\OneDrive - BBS Papenburg TW\Kindersicherungssoftware\Testing\Server\Server\Server\bin\Debug\Server.exe
+C:\Users\benwi\OneDrive - BBS Papenburg TW\Kindersicherungssoftware\Testing\Server\Server\Server\bin\Debug\Server.pdb
+C:\Users\benwi\OneDrive - BBS Papenburg TW\Kindersicherungssoftware\Testing\Server\Server\Server\obj\Debug\Server.csprojAssemblyReference.cache
+C:\Users\benwi\OneDrive - BBS Papenburg TW\Kindersicherungssoftware\Testing\Server\Server\Server\obj\Debug\Server.csproj.CoreCompileInputs.cache
+C:\Users\benwi\OneDrive - BBS Papenburg TW\Kindersicherungssoftware\Testing\Server\Server\Server\obj\Debug\Server.exe
+C:\Users\benwi\OneDrive - BBS Papenburg TW\Kindersicherungssoftware\Testing\Server\Server\Server\obj\Debug\Server.pdb
