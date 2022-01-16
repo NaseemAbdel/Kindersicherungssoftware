@@ -44,6 +44,7 @@ namespace EmpfängerKS
             IPEndPoint remoteEP = new IPEndPoint(ipAddress, 11000);
             sock = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
             sock.Connect(remoteEP);
+            Console.WriteLine("CONNECTED");
             ReceiverThread.RunWorkerAsync();
         }
         private void ReceiverThread_DoWork(object sender, DoWorkEventArgs e)
