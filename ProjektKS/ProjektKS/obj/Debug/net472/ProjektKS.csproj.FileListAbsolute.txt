@@ -1,0 +1,13 @@
+C:\Users\benwi\Documents\Github\Kindersicherungssoftware\ProjektKS\ProjektKS\obj\Debug\net472\ProjektKS.csprojAssemblyReference.cache
+C:\Users\benwi\Documents\Github\Kindersicherungssoftware\ProjektKS\ProjektKS\obj\Debug\net472\ProjektKS.Form1.resources
+C:\Users\benwi\Documents\Github\Kindersicherungssoftware\ProjektKS\ProjektKS\obj\Debug\net472\ProjektKS.Kindersicherung.resources
+C:\Users\benwi\Documents\Github\Kindersicherungssoftware\ProjektKS\ProjektKS\obj\Debug\net472\ProjektKS.Properties.Resources.resources
+C:\Users\benwi\Documents\Github\Kindersicherungssoftware\ProjektKS\ProjektKS\obj\Debug\net472\ProjektKS.csproj.GenerateResource.cache
+C:\Users\benwi\Documents\Github\Kindersicherungssoftware\ProjektKS\ProjektKS\obj\Debug\net472\ProjektKS.csproj.CoreCompileInputs.cache
+C:\Users\benwi\Documents\Github\Kindersicherungssoftware\ProjektKS\ProjektKS\obj\Debug\net472\ProjektKS.AssemblyInfoInputs.cache
+C:\Users\benwi\Documents\Github\Kindersicherungssoftware\ProjektKS\ProjektKS\obj\Debug\net472\ProjektKS.AssemblyInfo.cs
+C:\Users\benwi\Documents\Github\Kindersicherungssoftware\ProjektKS\ProjektKS\bin\Debug\net472\ProjektKS.exe.config
+C:\Users\benwi\Documents\Github\Kindersicherungssoftware\ProjektKS\ProjektKS\bin\Debug\net472\ProjektKS.exe
+C:\Users\benwi\Documents\Github\Kindersicherungssoftware\ProjektKS\ProjektKS\bin\Debug\net472\ProjektKS.pdb
+C:\Users\benwi\Documents\Github\Kindersicherungssoftware\ProjektKS\ProjektKS\obj\Debug\net472\ProjektKS.exe
+C:\Users\benwi\Documents\Github\Kindersicherungssoftware\ProjektKS\ProjektKS\obj\Debug\net472\ProjektKS.pdb
