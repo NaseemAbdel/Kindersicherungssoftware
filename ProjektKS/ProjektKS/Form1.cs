@@ -25,9 +25,9 @@ namespace ProjektKS
 
         private void btnLogIn_Click(object sender, EventArgs e)
         {
-            string loginanswer = kindersicherung.ReceiveData();
             kindersicherung.SendData(txtName.Text);
             kindersicherung.SendData(txtPasswort.Text);
+            string loginanswer = kindersicherung.ReceiveData();
             if (loginanswer == "///CMD_AUTH_SUCCESSFUL")
             {
                 kindersicherung.Show();
