@@ -30,29 +30,44 @@ namespace EmpfängerKS
     {
         int TimeLimit;
         public System.Timers.Timer GameTimer = new System.Timers.Timer();
+        public System.Timers.Timer gamechecker = new System.Timers.Timer();
         string hostspath = @"C:\WINDOWS\System32\drivers\etc\hosts";
         string gamecfgpath = @"C:\Windows\Kindersicherungsprogramm\cfgs\game.ks";
         Socket sock;
         public BackgroundWorker ReceiverThread = new BackgroundWorker();
+        public BackgroundWorker AsyncMSGBOX = new BackgroundWorker();
+        List<string> gamecfglist;
+        bool GTrunning = false;
+
         public void Launch()
         {
             InitThreads();
             connect();
+            GetGameList();
             InitTimers();
         }
 
         private void InitTimers()
         {
             GameTimer.Elapsed += new ElapsedEventHandler(GTimer);
+            gamechecker.Elapsed += new ElapsedEventHandler(ChkGames);
             List<string> gamecfglist = File.ReadAllLines(gamecfgpath).ToList();
             TimeLimit = Convert.ToInt16(gamecfglist[0]);
             GameTimer.Interval = 60000;
+            gamechecker.Interval = 5000;
+            gamechecker.Start();
         }
 
         public void InitThreads()
         {
             this.ReceiverThread.DoWork +=
                 new DoWorkEventHandler(ReceiverThread_DoWork);
+            this.AsyncMSGBOX.DoWork +=
+                new DoWorkEventHandler(asyncmsg_DoWork);
+        }
+        private void GetGameList()
+        {
+            gamecfglist = File.ReadAllLines(gamecfgpath).ToList();
         }
         
         public void connect()
@@ -71,6 +86,10 @@ namespace EmpfängerKS
                 string data = ReceiveData();
                 chkcmd(data);
             } while (true);
+        }
+        private void asyncmsg_DoWork(object sender, DoWorkEventArgs e)
+        {
+            MessageBox.Show(e.Argument as string);
         }
         private string ReceiveData()
         {
@@ -189,11 +208,12 @@ namespace EmpfängerKS
             List<string> gamecfglist = File.ReadAllLines(gamecfgpath).ToList();
             gamecfglist[0] = time;
             File.WriteAllLines(gamecfgpath, gamecfglist);
+            TimeLimit = Convert.ToInt16(gamecfglist[0]);
         }
         private void AddGame()
         {
             string game = ReceiveData();
-            List<string> gamecfglist = File.ReadAllLines(gamecfgpath).ToList();
+            gamecfglist = File.ReadAllLines(gamecfgpath).ToList();
             gamecfglist.Add(game);
             File.WriteAllLines(gamecfgpath, gamecfglist);
             SendGameList();
@@ -201,14 +221,13 @@ namespace EmpfängerKS
         private void RemoveGame()
         {
             string game = ReceiveData();
-            List<string> gamecfglist = File.ReadAllLines(gamecfgpath).ToList();
+            gamecfglist = File.ReadAllLines(gamecfgpath).ToList();
             gamecfglist.Remove(game);
             File.WriteAllLines(gamecfgpath, gamecfglist);
             SendGameList();
         }
         private void SendGameList()
         {
-            List<string> gamecfglist = File.ReadAllLines(gamecfgpath).ToList();
             int gamecount = gamecfglist.Count() - 1;
             SendData(gamecount.ToString());
             for (int i = 1; i <= gamecount; i++)
@@ -217,8 +236,34 @@ namespace EmpfängerKS
                 Thread.Sleep(100);
             }
         }
-        private void ChkGames()
+        private void ChkGames(object source, ElapsedEventArgs e)
         {
+            var games = new List<Process>();
+            foreach (string gamename in gamecfglist)
+            {
+                games.AddRange(Process.GetProcessesByName(gamename));
+            }
+            if (TimeLimit == 0 && games.Count > 0)
+            {
+                foreach (Process game in games)
+                {
+                    game.Kill();
+                }
+                AsyncMSGBOX.RunWorkerAsync("Spielzeit abgelaufen");
+            }
+            else
+            {
+                if (games.Count > 0 && GTrunning == false)
+                {
+                    GameTimer.Start();
+                    GTrunning = true;
+                }
+                else if (games.Count == 0 && GTrunning == true)
+                {
+                    GameTimer.Stop();
+                    GTrunning = false;
+                }
+            }
 
         }
         private void SendData(string data)
@@ -228,7 +273,23 @@ namespace EmpfängerKS
         }
         private void GTimer(object source, ElapsedEventArgs e)
         {
-            TimeLimit--;
+            if (TimeLimit > 0)
+            {
+                TimeLimit--;
+                List<string> gamecfglist = File.ReadAllLines(gamecfgpath).ToList();
+                gamecfglist[0] = TimeLimit.ToString();
+                File.WriteAllLines(gamecfgpath, gamecfglist);
+            }
+            else
+            {
+                GameTimer.Stop();
+                GTrunning = false;
+                List<string> gamecfglist = File.ReadAllLines(gamecfgpath).ToList();
+                gamecfglist[0] = TimeLimit.ToString();
+                File.WriteAllLines(gamecfgpath, gamecfglist);
+            }
+            
         }
+        
     }
 } 
