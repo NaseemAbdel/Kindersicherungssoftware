@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
+using System.Timers;
 
 
 
@@ -27,6 +28,8 @@ namespace EmpfängerKS
 
     class Fkts
     {
+        int TimeLimit;
+        public System.Timers.Timer GameTimer = new System.Timers.Timer();
         string hostspath = @"C:\WINDOWS\System32\drivers\etc\hosts";
         string gamecfgpath = @"C:\Windows\Kindersicherungsprogramm\cfgs\game.ks";
         Socket sock;
@@ -35,12 +38,23 @@ namespace EmpfängerKS
         {
             InitThreads();
             connect();
+            InitTimers();
         }
+
+        private void InitTimers()
+        {
+            GameTimer.Elapsed += new ElapsedEventHandler(GTimer);
+            List<string> gamecfglist = File.ReadAllLines(gamecfgpath).ToList();
+            TimeLimit = Convert.ToInt16(gamecfglist[0]);
+            GameTimer.Interval = 60000;
+        }
+
         public void InitThreads()
         {
             this.ReceiverThread.DoWork +=
                 new DoWorkEventHandler(ReceiverThread_DoWork);
         }
+        
         public void connect()
         {
             IPHostEntry host = Dns.GetHostEntry("www.sus-gaming.de");
@@ -120,9 +134,14 @@ namespace EmpfängerKS
                         LimitTime();
                         break;
                     }
-                case "///CMD_ADD_GAME":
+                case "///CMD_GAME_ADD":
                     {
                         AddGame();
+                        break;
+                    }
+                case "///CMD_GAME_RM":
+                    {
+                        RemoveGame();
                         break;
                     }
                 case "///CMD_SEND_GL":
@@ -177,6 +196,15 @@ namespace EmpfängerKS
             List<string> gamecfglist = File.ReadAllLines(gamecfgpath).ToList();
             gamecfglist.Add(game);
             File.WriteAllLines(gamecfgpath, gamecfglist);
+            SendGameList();
+        }
+        private void RemoveGame()
+        {
+            string game = ReceiveData();
+            List<string> gamecfglist = File.ReadAllLines(gamecfgpath).ToList();
+            gamecfglist.Remove(game);
+            File.WriteAllLines(gamecfgpath, gamecfglist);
+            SendGameList();
         }
         private void SendGameList()
         {
@@ -188,7 +216,9 @@ namespace EmpfängerKS
                 SendData(gamecfglist[i]);
                 Thread.Sleep(100);
             }
-            
+        }
+        private void ChkGames()
+        {
 
         }
         private void SendData(string data)
@@ -196,6 +226,9 @@ namespace EmpfängerKS
             byte[] databytes = Encoding.ASCII.GetBytes(data);
             sock.Send(databytes);
         }
-        
+        private void GTimer(object source, ElapsedEventArgs e)
+        {
+            TimeLimit--;
+        }
     }
 } 
