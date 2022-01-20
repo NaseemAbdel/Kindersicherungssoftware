@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{64C801CB-02FE-45AA-8CC8-AD13E5D4CA67}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <RootNamespace>EmpfängerKS</RootNamespace>
     <AssemblyName>EmpfängerKS</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
