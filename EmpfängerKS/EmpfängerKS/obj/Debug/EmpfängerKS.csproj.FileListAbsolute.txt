@@ -12,3 +12,10 @@ C:\Users\benwi\OneDrive - BBS Papenburg TW\Kindersicherungssoftware\Github\Kinde
 C:\Users\benwi\OneDrive - BBS Papenburg TW\Kindersicherungssoftware\Github\Kindersicherungssoftware\EmpfängerKS\EmpfängerKS\obj\Debug\EmpfängerKS.csproj.CoreCompileInputs.cache
 C:\Users\benwi\OneDrive - BBS Papenburg TW\Kindersicherungssoftware\Github\Kindersicherungssoftware\EmpfängerKS\EmpfängerKS\obj\Debug\EmpfängerKS.exe
 C:\Users\benwi\OneDrive - BBS Papenburg TW\Kindersicherungssoftware\Github\Kindersicherungssoftware\EmpfängerKS\EmpfängerKS\obj\Debug\EmpfängerKS.pdb
+C:\Users\benwi\Documents\Github\Kindersicherungssoftware\EmpfängerKS\EmpfängerKS\bin\Debug\EmpfängerKS.exe.config
+C:\Users\benwi\Documents\Github\Kindersicherungssoftware\EmpfängerKS\EmpfängerKS\bin\Debug\EmpfängerKS.exe
+C:\Users\benwi\Documents\Github\Kindersicherungssoftware\EmpfängerKS\EmpfängerKS\bin\Debug\EmpfängerKS.pdb
+C:\Users\benwi\Documents\Github\Kindersicherungssoftware\EmpfängerKS\EmpfängerKS\obj\Debug\EmpfängerKS.csprojAssemblyReference.cache
+C:\Users\benwi\Documents\Github\Kindersicherungssoftware\EmpfängerKS\EmpfängerKS\obj\Debug\EmpfängerKS.csproj.CoreCompileInputs.cache
+C:\Users\benwi\Documents\Github\Kindersicherungssoftware\EmpfängerKS\EmpfängerKS\obj\Debug\EmpfängerKS.exe
+C:\Users\benwi\Documents\Github\Kindersicherungssoftware\EmpfängerKS\EmpfängerKS\obj\Debug\EmpfängerKS.pdb
