@@ -37,7 +37,7 @@ namespace ProjektKS
             }
             else if (loginanswer == "///CMD_AUTH_FAILED")
             {
-                MessageBox.Show("ungültige Login-Daten");
+                MessageBox.Show("ungültige Login-Daten","Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtName.Text = "";
                 txtPasswort.Text = "";
             }
