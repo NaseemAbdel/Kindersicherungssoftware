@@ -158,8 +158,8 @@ namespace Server
             
             int trycount = 0;
             bool auth = false;
-            string username = "1";
-            string password = "1";
+            string username = "Eltern";
+            string password = "fktkacken";
             scchkTimer.Start();
             do
                 {
