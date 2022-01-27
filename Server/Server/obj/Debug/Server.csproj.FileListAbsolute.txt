@@ -5,3 +5,10 @@ C:\Users\benwi\OneDrive - BBS Papenburg TW\Kindersicherungssoftware\Testing\Serv
 C:\Users\benwi\OneDrive - BBS Papenburg TW\Kindersicherungssoftware\Testing\Server\Server\Server\obj\Debug\Server.csproj.CoreCompileInputs.cache
 C:\Users\benwi\OneDrive - BBS Papenburg TW\Kindersicherungssoftware\Testing\Server\Server\Server\obj\Debug\Server.exe
 C:\Users\benwi\OneDrive - BBS Papenburg TW\Kindersicherungssoftware\Testing\Server\Server\Server\obj\Debug\Server.pdb
+C:\Users\benwi\Documents\Github\Kindersicherungssoftware\Server\Server\bin\Debug\Server.exe.config
+C:\Users\benwi\Documents\Github\Kindersicherungssoftware\Server\Server\bin\Debug\Server.exe
+C:\Users\benwi\Documents\Github\Kindersicherungssoftware\Server\Server\bin\Debug\Server.pdb
+C:\Users\benwi\Documents\Github\Kindersicherungssoftware\Server\Server\obj\Debug\Server.csproj.CoreCompileInputs.cache
+C:\Users\benwi\Documents\Github\Kindersicherungssoftware\Server\Server\obj\Debug\Server.exe
+C:\Users\benwi\Documents\Github\Kindersicherungssoftware\Server\Server\obj\Debug\Server.pdb
+C:\Users\benwi\Documents\Github\Kindersicherungssoftware\Server\Server\obj\Debug\Server.csprojAssemblyReference.cache

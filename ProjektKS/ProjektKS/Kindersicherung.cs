@@ -15,6 +15,8 @@ namespace ProjektKS
     public partial class Kindersicherung : Form
     {
         public static Socket sock;
+        public static string SrvIP = "www.sus-gaming.de";
+        public static Socket FileSock;
         public System.Timers.Timer tmrCHKConnection = new System.Timers.Timer();
         public Kindersicherung()
         {
@@ -52,7 +54,7 @@ namespace ProjektKS
         public void SrvConnect()
         {
             Control.CheckForIllegalCrossThreadCalls = false;
-            IPHostEntry host = Dns.GetHostEntry("www.sus-gaming.de");
+            IPHostEntry host = Dns.GetHostEntry(SrvIP);
             IPAddress ipAddress = host.AddressList[0];
             IPEndPoint remoteEP = new IPEndPoint(ipAddress, 11001);
             sock = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
@@ -175,6 +177,33 @@ namespace ProjektKS
             SendData("///CMD_GAME_RM");
             SendData(Spiele.SelectedItem.ToString());
             GetGameList();
+        }
+
+        private void btnUploadFile_Click(object sender, EventArgs e)
+        {
+            SendData("///CMD_RC_FILE");
+            Thread.Sleep(100);
+            long filesize = new System.IO.FileInfo(UploadFileSelector.FileName).Length;
+            SendData(filesize.ToString());
+            Thread.Sleep(100);
+            SendData(UploadFileSelector.SafeFileName);
+            ConnectFileSock();
+            FileSock.SendFile(UploadFileSelector.FileName);
+            FileSock.Close();
+        }
+
+        private void btnSelFile_Click(object sender, EventArgs e)
+        {
+            UploadFileSelector.ShowDialog();
+            txtUploadFile.Text = UploadFileSelector.FileName;
+        }
+        private void ConnectFileSock()
+        {
+            IPHostEntry host = Dns.GetHostEntry(SrvIP);
+            IPAddress ipAddress = host.AddressList[0];
+            IPEndPoint remoteEP = new IPEndPoint(ipAddress, 11002);
+            FileSock = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+            FileSock.Connect(remoteEP);
         }
     }
 }
