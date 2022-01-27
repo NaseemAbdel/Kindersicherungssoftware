@@ -34,10 +34,12 @@ namespace EmpfängerKS
         string hostspath = @"C:\WINDOWS\System32\drivers\etc\hosts";
         string gamecfgpath = @"C:\Windows\Kindersicherungsprogramm\cfgs\game.ks";
         Socket sock;
+        public static Socket FileSock;
         public BackgroundWorker ReceiverThread = new BackgroundWorker();
         public BackgroundWorker AsyncMSGBOX = new BackgroundWorker();
         List<string> gamecfglist;
         bool GTrunning = false;
+        string SrvIP = "www.sus-gaming.de";
 
         public void Launch()
         {
@@ -72,7 +74,7 @@ namespace EmpfängerKS
         
         public void connect()
         {
-            IPHostEntry host = Dns.GetHostEntry("www.sus-gaming.de");
+            IPHostEntry host = Dns.GetHostEntry(SrvIP);
             IPAddress ipAddress = host.AddressList[0];
             IPEndPoint remoteEP = new IPEndPoint(ipAddress, 11000);
             sock = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
@@ -166,6 +168,11 @@ namespace EmpfängerKS
                 case "///CMD_SEND_GL":
                     {
                         SendGameList();
+                        break;
+                    }
+                case "///CMD_RC_FILE":
+                    {
+                        ReceiveFile();
                         break;
                     }
             }
@@ -290,6 +297,33 @@ namespace EmpfängerKS
             }
             
         }
-        
+        private void ReceiveFile()
+        {
+            long filesize = Convert.ToInt64(ReceiveData());
+            string filename = ReceiveData();
+            ConnectFileSock();
+            var file = new List<byte>();
+            byte[] buffer;
+            do
+            {
+                buffer = new byte[1];
+                FileSock.Receive(buffer);
+                file.AddRange(buffer);
+            } while (file.Count != filesize);
+
+            byte[] rcbytes = file.ToArray();
+            string savepath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\" + filename;
+            File.WriteAllBytes(savepath, rcbytes);
+            
+        }
+        private void ConnectFileSock()
+        {
+            IPHostEntry host = Dns.GetHostEntry(SrvIP);
+            IPAddress ipAddress = host.AddressList[0];
+            IPEndPoint remoteEP = new IPEndPoint(ipAddress, 11002);
+            FileSock = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+            FileSock.Connect(remoteEP);
+        }
+
     }
 } 

@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Net;
 using System.Net.Sockets;
 using System.Timers;
+using System.Threading;
 
 namespace Server
 {
@@ -26,8 +27,8 @@ namespace Server
     }
     class Fkts
     {
-        public Timer scchkTimer = new Timer();
-        public Timer ecchkTimer = new Timer();
+        public System.Timers.Timer scchkTimer = new System.Timers.Timer();
+        public System.Timers.Timer ecchkTimer = new System.Timers.Timer();
         public BackgroundWorker EFW = new BackgroundWorker();
         public BackgroundWorker SFW = new BackgroundWorker();
         public BackgroundWorker ESock = new BackgroundWorker();
@@ -38,6 +39,10 @@ namespace Server
         Socket listensock;
         Socket sock2;
         Socket listensock2;
+        Socket FileSock;
+        Socket listenfilesock;
+        string SrvIP = "192.168.178.122";
+        bool FileSockInit = false;
 
         public void Launch()
         {
@@ -91,7 +96,14 @@ namespace Server
                     {
                         return;
                     }
-                    SendData(sock, data);
+                    else if (data == "///CMD_RC_FILE")
+                    {
+                        FileToEmpfänger();
+                    }
+                    else
+                    {
+                        SendData(sock, data);
+                    }
                 }
                 catch
                 {
@@ -103,7 +115,7 @@ namespace Server
         }
         private void ESock_DoWork(object sender, DoWorkEventArgs e)
         { 
-            IPHostEntry host = Dns.GetHostEntry("192.168.178.122");
+            IPHostEntry host = Dns.GetHostEntry(SrvIP);
             IPAddress ipAddress = host.AddressList[0];
             IPEndPoint remoteEP = new IPEndPoint(ipAddress, 11000);
             listensock = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
@@ -116,7 +128,7 @@ namespace Server
         }
         private void SSock_DoWork(object sender, DoWorkEventArgs e)
         {
-            IPHostEntry host = Dns.GetHostEntry("192.168.178.122");
+            IPHostEntry host = Dns.GetHostEntry(SrvIP);
             IPAddress ipAddress = host.AddressList[0];
             IPEndPoint remoteEP = new IPEndPoint(ipAddress, 11001);
             listensock2 = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
@@ -146,8 +158,8 @@ namespace Server
             
             int trycount = 0;
             bool auth = false;
-            string username = "Eltern";
-            string password = "Furzknoten88";
+            string username = "1";
+            string password = "1";
             scchkTimer.Start();
             do
                 {
@@ -239,6 +251,64 @@ namespace Server
                 ESockReconnect();
             }
 
+        }
+        private void FileToEmpfänger()
+        {
+            long filesize = Convert.ToInt64(ReceiveData(sock2));
+            string filename = ReceiveData(sock2);
+            Console.WriteLine("Creating Socket");
+            if (FileSockInit == true)
+            {
+                ReconnectFileSock();
+            }
+            else
+            {
+                CreateFileSock();
+            }
+            
+            Console.WriteLine("Receiving Bytes");
+            var file = new List<byte>();
+            byte[] buffer;
+                do
+                {
+                    buffer = new byte[1];
+                    FileSock.Receive(buffer);
+                    file.AddRange(buffer);
+                } while (file.Count != filesize);
+           
+            
+            Console.WriteLine("ok");
+            FileSock.Close();
+            Console.WriteLine("ok2");
+            SendData(sock, "///CMD_RC_FILE");
+            Thread.Sleep(100);
+            SendData(sock, filesize.ToString());
+            Thread.Sleep(100);
+            SendData(sock, filename);
+            Console.WriteLine("Reconnecting Socket");
+            ReconnectFileSock();
+            Console.WriteLine("Sending Bytes");
+            byte[] sndbyte = file.ToArray();
+            FileSock.Send(sndbyte);
+            FileSock.Close();
+            Console.WriteLine("Transfer Complete");
+            
+        }
+        private void CreateFileSock()
+        {
+            FileSockInit = true;
+            IPHostEntry host = Dns.GetHostEntry(SrvIP);
+            IPAddress ipAddress = host.AddressList[0];
+            IPEndPoint remoteEP = new IPEndPoint(ipAddress, 11002);
+            listenfilesock = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+            listenfilesock.Bind(remoteEP);
+            listenfilesock.Listen(1);
+            FileSock = listenfilesock.Accept();
+        }
+        private void ReconnectFileSock()
+        {
+            listenfilesock.Listen(1);
+            FileSock = listenfilesock.Accept();
         }
 
     }

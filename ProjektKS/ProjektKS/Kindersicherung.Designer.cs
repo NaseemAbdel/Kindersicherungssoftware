@@ -53,6 +53,8 @@ namespace ProjektKS
             this.btnShowList = new System.Windows.Forms.Button();
             this.txtBanGame = new System.Windows.Forms.TextBox();
             this.btnBanGame = new System.Windows.Forms.Button();
+            this.btnSelFile = new System.Windows.Forms.Button();
+            this.UploadFileSelector = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.pbConnected)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbNotConnected)).BeginInit();
             this.SuspendLayout();
@@ -244,12 +246,13 @@ namespace ProjektKS
             this.btnUploadFile.BackColor = System.Drawing.Color.Gray;
             this.btnUploadFile.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnUploadFile.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.btnUploadFile.Location = new System.Drawing.Point(112, 200);
+            this.btnUploadFile.Location = new System.Drawing.Point(181, 200);
             this.btnUploadFile.Name = "btnUploadFile";
-            this.btnUploadFile.Size = new System.Drawing.Size(117, 20);
+            this.btnUploadFile.Size = new System.Drawing.Size(72, 20);
             this.btnUploadFile.TabIndex = 17;
-            this.btnUploadFile.Text = "Datei Hochladen";
+            this.btnUploadFile.Text = "Hochladen";
             this.btnUploadFile.UseVisualStyleBackColor = false;
+            this.btnUploadFile.Click += new System.EventHandler(this.btnUploadFile_Click);
             // 
             // Spiele
             // 
@@ -302,6 +305,23 @@ namespace ProjektKS
             this.btnBanGame.Visible = false;
             this.btnBanGame.Click += new System.EventHandler(this.btnBanGame_Click);
             // 
+            // btnSelFile
+            // 
+            this.btnSelFile.BackColor = System.Drawing.Color.Gray;
+            this.btnSelFile.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnSelFile.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.btnSelFile.Location = new System.Drawing.Point(112, 200);
+            this.btnSelFile.Name = "btnSelFile";
+            this.btnSelFile.Size = new System.Drawing.Size(63, 20);
+            this.btnSelFile.TabIndex = 23;
+            this.btnSelFile.Text = "Browse";
+            this.btnSelFile.UseVisualStyleBackColor = false;
+            this.btnSelFile.Click += new System.EventHandler(this.btnSelFile_Click);
+            // 
+            // UploadFileSelector
+            // 
+            this.UploadFileSelector.FileName = "openFileDialog1";
+            // 
             // Kindersicherung
             // 
             this.AccessibleRole = System.Windows.Forms.AccessibleRole.ToolBar;
@@ -309,6 +329,7 @@ namespace ProjektKS
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(686, 390);
+            this.Controls.Add(this.btnSelFile);
             this.Controls.Add(this.btnBanGame);
             this.Controls.Add(this.txtBanGame);
             this.Controls.Add(this.btnShowList);
@@ -366,5 +387,7 @@ namespace ProjektKS
         private System.Windows.Forms.Button btnShowList;
         private System.Windows.Forms.TextBox txtBanGame;
         private System.Windows.Forms.Button btnBanGame;
+        private System.Windows.Forms.Button btnSelFile;
+        private System.Windows.Forms.OpenFileDialog UploadFileSelector;
     }
 }
