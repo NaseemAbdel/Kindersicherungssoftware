@@ -130,6 +130,7 @@ namespace ProjektKS
             this.Controls.Add(this.label1);
             this.Name = "LogMeIn";
             this.Text = "LogMeIn";
+            this.Load += new System.EventHandler(this.LogMeIn_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
