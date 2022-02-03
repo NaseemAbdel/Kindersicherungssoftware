@@ -82,7 +82,7 @@ namespace ProjektKS
             string adress = txtBlockAccess.Text; 
             if (adress.Substring(0, 4) == "www.") //Überprüft, ob die ersten 4 Buchstaben der Adresse 'www.' sind
             {
-                SendData(txtBlockAccess.Text); //Wenn dem so ist, wird der String an den Server geleitet
+                SendData(txtBlockAccess.Text); //Wenn dem so ist, wird der String an den Server geleitet 
             }
             else
             {
