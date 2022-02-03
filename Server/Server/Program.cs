@@ -277,9 +277,7 @@ namespace Server
                 } while (file.Count != filesize);
            
             
-            Console.WriteLine("ok");
             FileSock.Close();
-            Console.WriteLine("ok2");
             SendData(sock, "///CMD_RC_FILE");
             Thread.Sleep(100);
             SendData(sock, filesize.ToString());
