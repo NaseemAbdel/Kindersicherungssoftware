@@ -32,7 +32,7 @@ namespace ProjektKS
             {
                 kindersicherung.Show(); //Öffnet das Hauptfenster
                 Hide(); //Versteckt das aktuelle Fenster
-                kindersicherung.ReceiverThread.RunWorkerAsync(); 
+                kindersicherung.ReceiverThread.RunWorkerAsync();
             }
             else if (loginanswer == "///CMD_AUTH_FAILED") //LogIn = Fehlgeschlagen
             {

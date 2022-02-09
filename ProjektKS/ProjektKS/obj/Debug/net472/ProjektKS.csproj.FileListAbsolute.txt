@@ -25,3 +25,17 @@ C:\Users\Tobi\Desktop\Kindersicherungssoftware\ProjektKS\ProjektKS\obj\Debug\net
 C:\Users\Tobi\Desktop\Kindersicherungssoftware\ProjektKS\ProjektKS\obj\Debug\net472\ProjektKS.csproj.CoreCompileInputs.cache
 C:\Users\Tobi\Desktop\Kindersicherungssoftware\ProjektKS\ProjektKS\obj\Debug\net472\ProjektKS.exe
 C:\Users\Tobi\Desktop\Kindersicherungssoftware\ProjektKS\ProjektKS\obj\Debug\net472\ProjektKS.pdb
+C:\Users\Ben\Documents\GitHub\Kindersicherungssoftware\ProjektKS\ProjektKS\bin\Debug\net472\ProjektKS.exe.config
+C:\Users\Ben\Documents\GitHub\Kindersicherungssoftware\ProjektKS\ProjektKS\bin\Debug\net472\ProjektKS.exe
+C:\Users\Ben\Documents\GitHub\Kindersicherungssoftware\ProjektKS\ProjektKS\bin\Debug\net472\ProjektKS.pdb
+C:\Users\Ben\Documents\GitHub\Kindersicherungssoftware\ProjektKS\ProjektKS\obj\Debug\net472\ProjektKS.csproj.AssemblyReference.cache
+C:\Users\Ben\Documents\GitHub\Kindersicherungssoftware\ProjektKS\ProjektKS\obj\Debug\net472\ProjektKS.Form1.resources
+C:\Users\Ben\Documents\GitHub\Kindersicherungssoftware\ProjektKS\ProjektKS\obj\Debug\net472\ProjektKS.Kindersicherung.resources
+C:\Users\Ben\Documents\GitHub\Kindersicherungssoftware\ProjektKS\ProjektKS\obj\Debug\net472\ProjektKS.Properties.Resources.resources
+C:\Users\Ben\Documents\GitHub\Kindersicherungssoftware\ProjektKS\ProjektKS\obj\Debug\net472\ProjektKS.csproj.GenerateResource.cache
+C:\Users\Ben\Documents\GitHub\Kindersicherungssoftware\ProjektKS\ProjektKS\obj\Debug\net472\ProjektKS.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Ben\Documents\GitHub\Kindersicherungssoftware\ProjektKS\ProjektKS\obj\Debug\net472\ProjektKS.AssemblyInfoInputs.cache
+C:\Users\Ben\Documents\GitHub\Kindersicherungssoftware\ProjektKS\ProjektKS\obj\Debug\net472\ProjektKS.AssemblyInfo.cs
+C:\Users\Ben\Documents\GitHub\Kindersicherungssoftware\ProjektKS\ProjektKS\obj\Debug\net472\ProjektKS.csproj.CoreCompileInputs.cache
+C:\Users\Ben\Documents\GitHub\Kindersicherungssoftware\ProjektKS\ProjektKS\obj\Debug\net472\ProjektKS.exe
+C:\Users\Ben\Documents\GitHub\Kindersicherungssoftware\ProjektKS\ProjektKS\obj\Debug\net472\ProjektKS.pdb

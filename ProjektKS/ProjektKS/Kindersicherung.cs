@@ -18,6 +18,7 @@ namespace ProjektKS
         public static string SrvIP = "www.sus-gaming.de";
         public static Socket FileSock;
         public System.Timers.Timer tmrCHKConnection = new System.Timers.Timer();
+
         public Kindersicherung()
         {
             InitializeComponent();
@@ -34,6 +35,20 @@ namespace ProjektKS
             do
             {
                 string data = ReceiveData();
+                if (data == "///CMD_Econnected")
+                {
+                    lblConnected.Text = "Verbindung stabil";
+                    lblConnected.ForeColor = Color.Green;
+                    tmrCHKConnection.Stop();
+                    tmrCHKConnection.Start();
+                }
+                else if (data == "///CMD_Edisconnected")
+                {
+                    lblConnected.Text = "Verbindung getrennt";
+                    lblConnected.ForeColor = Color.Red;
+                    tmrCHKConnection.Stop();
+                    tmrCHKConnection.Start();
+                }
             } while (true);
 
         }
@@ -60,7 +75,8 @@ namespace ProjektKS
             sock = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
             sock.Connect(remoteEP);
             tmrCHKConnection.Elapsed += new ElapsedEventHandler(CheckConnection);
-            tmrCHKConnection.Interval = 3000;
+            tmrCHKConnection.Interval = 5000;
+            tmrCHKConnection.Start();
         }
 
         private void Kindersicherung_FormClosing(object sender, FormClosingEventArgs e) //Überprüft, ob das Programm wirklich geschlossen werden soll
@@ -109,7 +125,11 @@ namespace ProjektKS
 
         public void CheckConnection(object source, ElapsedEventArgs e)
         {
-            
+            pbConnected.Visible = false;
+            pbNotConnected.Visible = true;
+            lblConnected.Visible = true;
+            lblConnected.Text = "Verbindung zum Empfänger getrennt";
+            lblConnected.ForeColor = Color.Red;
         }
 
         private void btnKillProcess_Click(object sender, EventArgs e)

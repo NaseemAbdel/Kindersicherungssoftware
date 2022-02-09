@@ -12,3 +12,10 @@ C:\Users\benwi\Documents\Github\Kindersicherungssoftware\Server\Server\obj\Debug
 C:\Users\benwi\Documents\Github\Kindersicherungssoftware\Server\Server\obj\Debug\Server.exe
 C:\Users\benwi\Documents\Github\Kindersicherungssoftware\Server\Server\obj\Debug\Server.pdb
 C:\Users\benwi\Documents\Github\Kindersicherungssoftware\Server\Server\obj\Debug\Server.csprojAssemblyReference.cache
+C:\Users\Ben\Documents\GitHub\Kindersicherungssoftware\Server\Server\bin\Debug\Server.exe.config
+C:\Users\Ben\Documents\GitHub\Kindersicherungssoftware\Server\Server\bin\Debug\Server.exe
+C:\Users\Ben\Documents\GitHub\Kindersicherungssoftware\Server\Server\bin\Debug\Server.pdb
+C:\Users\Ben\Documents\GitHub\Kindersicherungssoftware\Server\Server\obj\Debug\Server.csproj.AssemblyReference.cache
+C:\Users\Ben\Documents\GitHub\Kindersicherungssoftware\Server\Server\obj\Debug\Server.csproj.CoreCompileInputs.cache
+C:\Users\Ben\Documents\GitHub\Kindersicherungssoftware\Server\Server\obj\Debug\Server.exe
+C:\Users\Ben\Documents\GitHub\Kindersicherungssoftware\Server\Server\obj\Debug\Server.pdb
