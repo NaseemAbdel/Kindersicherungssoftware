@@ -33,6 +33,7 @@ namespace Server
         public BackgroundWorker SFW = new BackgroundWorker();
         public BackgroundWorker ESock = new BackgroundWorker();
         public BackgroundWorker SSock = new BackgroundWorker();
+        public bool Econnected = false;
          
         
         Socket sock;
@@ -124,6 +125,8 @@ namespace Server
             sock = listensock.Accept();
             Console.WriteLine("Empfänger verbunden");
             ecchkTimer.Start();
+            Econnected = true;
+            SendData(sock2, "///CMD_Econnected");
             EFW.RunWorkerAsync();
         }
         private void SSock_DoWork(object sender, DoWorkEventArgs e)
@@ -151,6 +154,8 @@ namespace Server
             sock = listensock.Accept();
             Console.WriteLine("Empfänger verbunden");
             ecchkTimer.Start();
+            Econnected = true;
+            SendData(sock2, "///CMD_Econnected");
             EFW.RunWorkerAsync();
         }
         private void ChkPW()
@@ -176,6 +181,14 @@ namespace Server
                     if (username == receivedUN && password == receivedPW)
                     {
                         SendData(sock2, "///CMD_AUTH_SUCCESSFUL");
+                        if(Econnected == false)
+                        {
+                        SendData(sock2, "///CMD_Edisconnected");
+                        }
+                        else
+                        {
+                        SendData(sock2, "///CMD_Econnected");
+                        }
                         Console.WriteLine("Sender authentifiziert");
                         auth = true;
                         break;
@@ -248,6 +261,8 @@ namespace Server
             {
                 Console.WriteLine("Verbindung zum Empfänger getrennt");
                 ecchkTimer.Stop();
+                Econnected = false;
+                SendData(sock2,"///CMD_Edisconnected");
                 ESockReconnect();
             }
 

@@ -42,8 +42,8 @@ namespace ProjektKS
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Yu Gothic UI", 27.75F, System.Drawing.FontStyle.Bold);
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.label1.Location = new System.Drawing.Point(278, 40);
+            this.label1.ForeColor = System.Drawing.Color.Red;
+            this.label1.Location = new System.Drawing.Point(268, 46);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(127, 50);
             this.label1.TabIndex = 0;
@@ -53,7 +53,7 @@ namespace ProjektKS
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Yu Gothic UI", 20.25F);
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.label2.ForeColor = System.Drawing.Color.Red;
             this.label2.Location = new System.Drawing.Point(287, 126);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(88, 37);
@@ -63,7 +63,7 @@ namespace ProjektKS
             // txtName
             // 
             this.txtName.BackColor = System.Drawing.Color.Gray;
-            this.txtName.ForeColor = System.Drawing.Color.GhostWhite;
+            this.txtName.ForeColor = System.Drawing.Color.Red;
             this.txtName.Location = new System.Drawing.Point(294, 166);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(76, 20);
@@ -72,7 +72,7 @@ namespace ProjektKS
             // txtPasswort
             // 
             this.txtPasswort.BackColor = System.Drawing.Color.Gray;
-            this.txtPasswort.ForeColor = System.Drawing.Color.GhostWhite;
+            this.txtPasswort.ForeColor = System.Drawing.Color.Red;
             this.txtPasswort.Location = new System.Drawing.Point(294, 231);
             this.txtPasswort.Name = "txtPasswort";
             this.txtPasswort.Size = new System.Drawing.Size(76, 20);
@@ -82,8 +82,8 @@ namespace ProjektKS
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Yu Gothic UI", 20.25F);
-            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.label3.Location = new System.Drawing.Point(283, 197);
+            this.label3.ForeColor = System.Drawing.Color.Red;
+            this.label3.Location = new System.Drawing.Point(270, 194);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(121, 37);
             this.label3.TabIndex = 3;
@@ -93,10 +93,10 @@ namespace ProjektKS
             // 
             this.btnLogIn.BackColor = System.Drawing.Color.Gray;
             this.btnLogIn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnLogIn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.btnLogIn.Location = new System.Drawing.Point(294, 273);
+            this.btnLogIn.ForeColor = System.Drawing.Color.Red;
+            this.btnLogIn.Location = new System.Drawing.Point(294, 257);
             this.btnLogIn.Name = "btnLogIn";
-            this.btnLogIn.Size = new System.Drawing.Size(75, 20);
+            this.btnLogIn.Size = new System.Drawing.Size(75, 23);
             this.btnLogIn.TabIndex = 5;
             this.btnLogIn.Text = "einloggen";
             this.btnLogIn.UseVisualStyleBackColor = false;
@@ -106,7 +106,7 @@ namespace ProjektKS
             // 
             this.cbPasswort.AutoSize = true;
             this.cbPasswort.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.cbPasswort.ForeColor = System.Drawing.SystemColors.Window;
+            this.cbPasswort.ForeColor = System.Drawing.Color.Red;
             this.cbPasswort.Location = new System.Drawing.Point(375, 234);
             this.cbPasswort.Name = "cbPasswort";
             this.cbPasswort.Size = new System.Drawing.Size(115, 17);
@@ -130,6 +130,7 @@ namespace ProjektKS
             this.Controls.Add(this.label1);
             this.Name = "LogMeIn";
             this.Text = "LogMeIn";
+            this.Load += new System.EventHandler(this.LogMeIn_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

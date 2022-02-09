@@ -19,26 +19,25 @@ namespace ProjektKS
         public LogMeIn()
         {
             InitializeComponent();
-            kindersicherung.SrvConnect();
-            txtPasswort.PasswordChar = '*';
+            kindersicherung.SrvConnect(); //Stellt Verbindung mit Server her
+            txtPasswort.PasswordChar = '*'; //Versteckt das Passwort beim Reinladen des Programms 
         }
 
         private void btnLogIn_Click(object sender, EventArgs e)
         {
-            kindersicherung.SendData(txtName.Text);
-            kindersicherung.SendData(txtPasswort.Text);
-            string loginanswer = kindersicherung.ReceiveData();
-            if (loginanswer == "///CMD_AUTH_SUCCESSFUL")
+            kindersicherung.SendData(txtName.Text); //Übergibt Namen und Passwort an den Server
+            kindersicherung.SendData(txtPasswort.Text); 
+            string loginanswer = kindersicherung.ReceiveData(); //Der Server vergleicht die Daten und sendet eine Antwort zurück
+            if (loginanswer == "///CMD_AUTH_SUCCESSFUL") //LogIn = Erfolgreich
             {
-                kindersicherung.Show();
-                Hide();
+                kindersicherung.Show(); //Öffnet das Hauptfenster
+                Hide(); //Versteckt das aktuelle Fenster
                 kindersicherung.ReceiverThread.RunWorkerAsync();
-                kindersicherung.tmrCHKConnection.Start();
             }
-            else if (loginanswer == "///CMD_AUTH_FAILED")
+            else if (loginanswer == "///CMD_AUTH_FAILED") //LogIn = Fehlgeschlagen
             {
-                MessageBox.Show("ungültige Login-Daten","Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtName.Text = "";
+                MessageBox.Show("ungültige Login-Daten","Error", MessageBoxButtons.OK, MessageBoxIcon.Warning); //Error Meldung 
+                txtName.Text = ""; //Textfelder werden geleert
                 txtPasswort.Text = "";
             }
 
@@ -46,14 +45,19 @@ namespace ProjektKS
 
         private void cbPasswort_CheckedChanged(object sender, EventArgs e)
         {
-            if (cbPasswort.Checked)
+            if (cbPasswort.Checked) //Wenn die Checkbox geklickt wird, wird das Passwort sichtbar gemacht
             {
                 txtPasswort.PasswordChar = '\0';
             }
-            else
+            else //Wenn der Haken entfernt wird, wird das Passwort wieder versteckt
             {
                 txtPasswort.PasswordChar = '*';
             }
+        }
+
+        private void LogMeIn_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

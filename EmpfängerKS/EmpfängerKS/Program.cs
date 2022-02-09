@@ -250,6 +250,8 @@ namespace EmpfängerKS
         }
         private void ChkGames(object source, ElapsedEventArgs e) //Überprüft ob Spiele ausgeführt werden, und schließt sie falls die Zeit abgelaufen ist
         {
+            SendData("///CMD_PING"); //Nachricht zum Sender um Verbindung zu prüfen
+
             var games = new List<Process>(); //Prozessliste für Spiele
             foreach (string gamename in gamecfglist) //Fügt alle laufenden Prozesse mit den Prozessnamen der game.ks in die Prozessliste
             {

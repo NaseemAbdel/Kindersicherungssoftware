@@ -40,7 +40,6 @@ namespace ProjektKS
             this.btnLimitTime = new System.Windows.Forms.Button();
             this.pbConnected = new System.Windows.Forms.PictureBox();
             this.lblConnected = new System.Windows.Forms.Label();
-            this.lblNotConnected = new System.Windows.Forms.Label();
             this.pbNotConnected = new System.Windows.Forms.PictureBox();
             this.txtOpenFile = new System.Windows.Forms.TextBox();
             this.txtTaskKill = new System.Windows.Forms.TextBox();
@@ -63,7 +62,7 @@ namespace ProjektKS
             // 
             this.btnShutdown.BackColor = System.Drawing.Color.Gray;
             this.btnShutdown.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnShutdown.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.btnShutdown.ForeColor = System.Drawing.Color.Red;
             this.btnShutdown.Location = new System.Drawing.Point(10, 51);
             this.btnShutdown.Name = "btnShutdown";
             this.btnShutdown.Size = new System.Drawing.Size(97, 39);
@@ -75,6 +74,7 @@ namespace ProjektKS
             // txtBlockAccess
             // 
             this.txtBlockAccess.BackColor = System.Drawing.Color.Gray;
+            this.txtBlockAccess.ForeColor = System.Drawing.Color.Red;
             this.txtBlockAccess.Location = new System.Drawing.Point(10, 95);
             this.txtBlockAccess.Name = "txtBlockAccess";
             this.txtBlockAccess.Size = new System.Drawing.Size(97, 20);
@@ -84,7 +84,7 @@ namespace ProjektKS
             // 
             this.btnBlockAccess.BackColor = System.Drawing.Color.Gray;
             this.btnBlockAccess.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnBlockAccess.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.btnBlockAccess.ForeColor = System.Drawing.Color.Red;
             this.btnBlockAccess.Location = new System.Drawing.Point(112, 95);
             this.btnBlockAccess.Name = "btnBlockAccess";
             this.btnBlockAccess.Size = new System.Drawing.Size(109, 20);
@@ -97,7 +97,7 @@ namespace ProjektKS
             // 
             this.btnRunProcess.BackColor = System.Drawing.Color.Gray;
             this.btnRunProcess.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnRunProcess.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.btnRunProcess.ForeColor = System.Drawing.Color.Red;
             this.btnRunProcess.Location = new System.Drawing.Point(113, 147);
             this.btnRunProcess.Name = "btnRunProcess";
             this.btnRunProcess.Size = new System.Drawing.Size(108, 20);
@@ -109,8 +109,8 @@ namespace ProjektKS
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.label1.Location = new System.Drawing.Point(10, 231);
+            this.label1.ForeColor = System.Drawing.Color.Red;
+            this.label1.Location = new System.Drawing.Point(457, 54);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(141, 13);
             this.label1.TabIndex = 5;
@@ -119,7 +119,8 @@ namespace ProjektKS
             // txtLimitTime
             // 
             this.txtLimitTime.BackColor = System.Drawing.Color.Gray;
-            this.txtLimitTime.Location = new System.Drawing.Point(10, 246);
+            this.txtLimitTime.ForeColor = System.Drawing.Color.Red;
+            this.txtLimitTime.Location = new System.Drawing.Point(457, 69);
             this.txtLimitTime.Name = "txtLimitTime";
             this.txtLimitTime.Size = new System.Drawing.Size(26, 20);
             this.txtLimitTime.TabIndex = 6;
@@ -128,8 +129,8 @@ namespace ProjektKS
             // 
             this.btnLimitTime.BackColor = System.Drawing.Color.Gray;
             this.btnLimitTime.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnLimitTime.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.btnLimitTime.Location = new System.Drawing.Point(41, 246);
+            this.btnLimitTime.ForeColor = System.Drawing.Color.Red;
+            this.btnLimitTime.Location = new System.Drawing.Point(488, 69);
             this.btnLimitTime.Name = "btnLimitTime";
             this.btnLimitTime.Size = new System.Drawing.Size(66, 20);
             this.btnLimitTime.TabIndex = 7;
@@ -153,29 +154,19 @@ namespace ProjektKS
             // 
             this.lblConnected.AutoSize = true;
             this.lblConnected.ForeColor = System.Drawing.Color.Lime;
-            this.lblConnected.Location = new System.Drawing.Point(293, 219);
+            this.lblConnected.Location = new System.Drawing.Point(256, 216);
             this.lblConnected.Name = "lblConnected";
-            this.lblConnected.Size = new System.Drawing.Size(88, 13);
+            this.lblConnected.Size = new System.Drawing.Size(173, 13);
             this.lblConnected.TabIndex = 9;
-            this.lblConnected.Text = "Verbindung stabil";
+            this.lblConnected.Text = "Verbindung zm Empfänger getrennt";
+            this.lblConnected.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblConnected.Visible = false;
-            // 
-            // lblNotConnected
-            // 
-            this.lblNotConnected.AutoSize = true;
-            this.lblNotConnected.ForeColor = System.Drawing.Color.Red;
-            this.lblNotConnected.Location = new System.Drawing.Point(277, 219);
-            this.lblNotConnected.Name = "lblNotConnected";
-            this.lblNotConnected.Size = new System.Drawing.Size(127, 13);
-            this.lblNotConnected.TabIndex = 10;
-            this.lblNotConnected.Text = "Verbindung abgebrochen";
-            this.lblNotConnected.Visible = false;
             // 
             // pbNotConnected
             // 
             this.pbNotConnected.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pbNotConnected.Image = ((System.Drawing.Image)(resources.GetObject("pbNotConnected.Image")));
-            this.pbNotConnected.Location = new System.Drawing.Point(259, 59);
+            this.pbNotConnected.Location = new System.Drawing.Point(259, 60);
             this.pbNotConnected.Name = "pbNotConnected";
             this.pbNotConnected.Size = new System.Drawing.Size(160, 153);
             this.pbNotConnected.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -186,6 +177,7 @@ namespace ProjektKS
             // txtOpenFile
             // 
             this.txtOpenFile.BackColor = System.Drawing.Color.Gray;
+            this.txtOpenFile.ForeColor = System.Drawing.Color.Red;
             this.txtOpenFile.Location = new System.Drawing.Point(10, 148);
             this.txtOpenFile.Name = "txtOpenFile";
             this.txtOpenFile.Size = new System.Drawing.Size(97, 20);
@@ -194,6 +186,7 @@ namespace ProjektKS
             // txtTaskKill
             // 
             this.txtTaskKill.BackColor = System.Drawing.Color.Gray;
+            this.txtTaskKill.ForeColor = System.Drawing.Color.Red;
             this.txtTaskKill.Location = new System.Drawing.Point(10, 174);
             this.txtTaskKill.Name = "txtTaskKill";
             this.txtTaskKill.Size = new System.Drawing.Size(97, 20);
@@ -203,7 +196,7 @@ namespace ProjektKS
             // 
             this.btnKillProcess.BackColor = System.Drawing.Color.Gray;
             this.btnKillProcess.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnKillProcess.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.btnKillProcess.ForeColor = System.Drawing.Color.Red;
             this.btnKillProcess.Location = new System.Drawing.Point(112, 174);
             this.btnKillProcess.Name = "btnKillProcess";
             this.btnKillProcess.Size = new System.Drawing.Size(117, 20);
@@ -216,7 +209,7 @@ namespace ProjektKS
             // 
             this.btnRemoveBlock.BackColor = System.Drawing.Color.Gray;
             this.btnRemoveBlock.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnRemoveBlock.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.btnRemoveBlock.ForeColor = System.Drawing.Color.Red;
             this.btnRemoveBlock.Location = new System.Drawing.Point(112, 121);
             this.btnRemoveBlock.Name = "btnRemoveBlock";
             this.btnRemoveBlock.Size = new System.Drawing.Size(109, 20);
@@ -228,6 +221,7 @@ namespace ProjektKS
             // txtRemoveBlock
             // 
             this.txtRemoveBlock.BackColor = System.Drawing.Color.Gray;
+            this.txtRemoveBlock.ForeColor = System.Drawing.Color.Red;
             this.txtRemoveBlock.Location = new System.Drawing.Point(10, 121);
             this.txtRemoveBlock.Name = "txtRemoveBlock";
             this.txtRemoveBlock.Size = new System.Drawing.Size(97, 20);
@@ -236,6 +230,7 @@ namespace ProjektKS
             // txtUploadFile
             // 
             this.txtUploadFile.BackColor = System.Drawing.Color.Gray;
+            this.txtUploadFile.ForeColor = System.Drawing.Color.Red;
             this.txtUploadFile.Location = new System.Drawing.Point(10, 200);
             this.txtUploadFile.Name = "txtUploadFile";
             this.txtUploadFile.Size = new System.Drawing.Size(97, 20);
@@ -245,7 +240,7 @@ namespace ProjektKS
             // 
             this.btnUploadFile.BackColor = System.Drawing.Color.Gray;
             this.btnUploadFile.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnUploadFile.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.btnUploadFile.ForeColor = System.Drawing.Color.Red;
             this.btnUploadFile.Location = new System.Drawing.Point(181, 200);
             this.btnUploadFile.Name = "btnUploadFile";
             this.btnUploadFile.Size = new System.Drawing.Size(72, 20);
@@ -259,9 +254,9 @@ namespace ProjektKS
             this.Spiele.AccessibleName = "";
             this.Spiele.BackColor = System.Drawing.Color.Gray;
             this.Spiele.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.Spiele.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.Spiele.ForeColor = System.Drawing.Color.Red;
             this.Spiele.FormattingEnabled = true;
-            this.Spiele.Location = new System.Drawing.Point(157, 272);
+            this.Spiele.Location = new System.Drawing.Point(604, 95);
             this.Spiele.Name = "Spiele";
             this.Spiele.Size = new System.Drawing.Size(70, 104);
             this.Spiele.TabIndex = 19;
@@ -273,8 +268,8 @@ namespace ProjektKS
             // 
             this.btnShowList.BackColor = System.Drawing.Color.Gray;
             this.btnShowList.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnShowList.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.btnShowList.Location = new System.Drawing.Point(39, 272);
+            this.btnShowList.ForeColor = System.Drawing.Color.Red;
+            this.btnShowList.Location = new System.Drawing.Point(486, 95);
             this.btnShowList.Name = "btnShowList";
             this.btnShowList.Size = new System.Drawing.Size(112, 50);
             this.btnShowList.TabIndex = 20;
@@ -309,7 +304,7 @@ namespace ProjektKS
             // 
             this.btnSelFile.BackColor = System.Drawing.Color.Gray;
             this.btnSelFile.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnSelFile.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.btnSelFile.ForeColor = System.Drawing.Color.Red;
             this.btnSelFile.Location = new System.Drawing.Point(112, 200);
             this.btnSelFile.Name = "btnSelFile";
             this.btnSelFile.Size = new System.Drawing.Size(63, 20);
@@ -342,7 +337,6 @@ namespace ProjektKS
             this.Controls.Add(this.btnKillProcess);
             this.Controls.Add(this.txtOpenFile);
             this.Controls.Add(this.pbNotConnected);
-            this.Controls.Add(this.lblNotConnected);
             this.Controls.Add(this.lblConnected);
             this.Controls.Add(this.pbConnected);
             this.Controls.Add(this.btnLimitTime);
@@ -374,7 +368,6 @@ namespace ProjektKS
         private System.Windows.Forms.Button btnLimitTime;
         private System.Windows.Forms.PictureBox pbConnected;
         private System.Windows.Forms.Label lblConnected;
-        private System.Windows.Forms.Label lblNotConnected;
         private System.Windows.Forms.PictureBox pbNotConnected;
         private System.Windows.Forms.TextBox txtOpenFile;
         private System.Windows.Forms.TextBox txtTaskKill;
