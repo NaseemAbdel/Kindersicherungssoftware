@@ -263,7 +263,6 @@ namespace Server
                 Console.WriteLine("Verbindung zum Empfänger getrennt");
                 ecchkTimer.Stop();
                 Econnected = false;
-                SendData(sock2,"///CMD_Edisconnected");
                 ESockReconnect();
             }
 
