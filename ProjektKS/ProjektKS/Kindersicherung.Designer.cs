@@ -160,7 +160,6 @@ namespace ProjektKS
             this.lblConnected.TabIndex = 9;
             this.lblConnected.Text = "Verbindung zm Empfänger getrennt";
             this.lblConnected.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblConnected.Visible = false;
             // 
             // pbNotConnected
             // 

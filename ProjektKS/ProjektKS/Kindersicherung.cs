@@ -35,20 +35,6 @@ namespace ProjektKS
             do
             {
                 string data = ReceiveData();
-                if (data == "///CMD_Econnected")
-                {
-                    lblConnected.Text = "Verbindung stabil";
-                    lblConnected.ForeColor = Color.Green;
-                    tmrCHKConnection.Stop();
-                    tmrCHKConnection.Start();
-                }
-                else if (data == "///CMD_Edisconnected")
-                {
-                    lblConnected.Text = "Verbindung getrennt";
-                    lblConnected.ForeColor = Color.Red;
-                    tmrCHKConnection.Stop();
-                    tmrCHKConnection.Start();
-                }
             } while (true);
 
         }
@@ -76,8 +62,9 @@ namespace ProjektKS
             sock.Connect(remoteEP);
             tmrCHKConnection.Elapsed += new ElapsedEventHandler(CheckConnection);
             tmrCHKConnection.Interval = 5000;
-            tmrCHKConnection.Start();
+            
         }
+        
 
         private void Kindersicherung_FormClosing(object sender, FormClosingEventArgs e) //Überprüft, ob das Programm wirklich geschlossen werden soll
         {
@@ -125,11 +112,22 @@ namespace ProjektKS
 
         public void CheckConnection(object source, ElapsedEventArgs e)
         {
-            pbConnected.Visible = false;
-            pbNotConnected.Visible = true;
-            lblConnected.Visible = true;
-            lblConnected.Text = "Verbindung zum Empfänger getrennt";
-            lblConnected.ForeColor = Color.Red;
+            SendData("///CMD_EconnectCHK");
+            string data = ReceiveData();
+            if (data == "///CMD_Econnected")
+            {
+                lblConnected.Text = "Verbindung stabil";
+                lblConnected.ForeColor = Color.Green;
+                pbConnected.Visible = true;
+                pbNotConnected.Visible = false;
+            }
+            else if (data == "///CMD_Edisconnected")
+            {
+                lblConnected.Text = "Verbindung getrennt";
+                lblConnected.ForeColor = Color.Red;
+                pbConnected.Visible = false;
+                pbNotConnected.Visible = true;
+            }
         }
 
         private void btnKillProcess_Click(object sender, EventArgs e)
