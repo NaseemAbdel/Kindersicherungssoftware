@@ -9,7 +9,7 @@ using System.Threading;
 using System.Net.Sockets;
 using System.Net;
 using System.Timers;
-
+using System.IO;
 namespace ProjektKS
 {
     public partial class Kindersicherung : Form
@@ -22,45 +22,44 @@ namespace ProjektKS
         public Kindersicherung()
         {
             InitializeComponent();
-            
         }
 
         private void btnShutdown_Click(object sender, EventArgs e)
         {
-            SendData("///CMD_SHUTDOWN");
+            SendData("///CMD_SHUTDOWN"); //Sendet den Befehl zum Herunterfahren des PC's an den Server
         }
 
-        public void ReceiverThread_DoWork(object sender, DoWorkEventArgs e)
+        public void ReceiverThread_DoWork(object sender, DoWorkEventArgs e) //War eine Testfunktion (wird aktuell nicht gebraucht)
         {
             do
             {
                 string data = ReceiveData();
-            } while (true);
+            } while (true); 
 
         }
         public string ReceiveData()
         {
-            string data = null;
+            string data = null; 
             byte[] bs = null;
-            bs = new byte[1024];
-            int bsint = sock.Receive(bs);
-            data += Encoding.ASCII.GetString(bs, 0, bsint);
+            bs = new byte[1024]; //Neues Byte-Array mit einer größe von 1024 Bytes
+            int bsint = sock.Receive(bs); //Anzahl der Bytes werden in einem Integer gespeichert
+            data += Encoding.ASCII.GetString(bs, 0, bsint); //Die Bytes werden zu einem String decodiert
             return data;
         }
         public void SendData(string msg)
         {
-            byte[] data = Encoding.ASCII.GetBytes(msg);
-            sock.Send(data);
+            byte[] data = Encoding.ASCII.GetBytes(msg); //Der übergebene String wird in Bytes konvertiert und in ein Byte-Array geschrieben
+            sock.Send(data); //Das Byte-Array wird an den Server gesendet
         }
         public void SrvConnect()
         {
-            Control.CheckForIllegalCrossThreadCalls = false;
-            IPHostEntry host = Dns.GetHostEntry(SrvIP);
-            IPAddress ipAddress = host.AddressList[0];
-            IPEndPoint remoteEP = new IPEndPoint(ipAddress, 11001);
-            sock = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-            sock.Connect(remoteEP);
-            tmrCHKConnection.Elapsed += new ElapsedEventHandler(CheckConnection);
+            Control.CheckForIllegalCrossThreadCalls = false; //Überwachung, ob Async-Threads auf das Formular zugreifen wird deaktiviert 
+            IPHostEntry host = Dns.GetHostEntry(SrvIP); //Die Server IP wird als IPHostEntry deklariert
+            IPAddress ipAddress = host.AddressList[0]; //Die Server IP wird nun als IPAdresse gespeichert
+            IPEndPoint remoteEP = new IPEndPoint(ipAddress, 11001); //IP-Endpoint mit der IPAdresse und dem Port erstellen
+            sock = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp); //Es wird ein neuer Socket erstellt
+            sock.Connect(remoteEP); //Der Socket verbindet sich
+            tmrCHKConnection.Elapsed += new ElapsedEventHandler(CheckConnection);  //5 Sekunden Timer, der auf ein Signal des Empfängers reagiert  
             tmrCHKConnection.Interval = 5000;
             
         }
@@ -112,21 +111,21 @@ namespace ProjektKS
 
         public void CheckConnection(object source, ElapsedEventArgs e)
         {
-            SendData("///CMD_EconnectCHK");
-            string data = ReceiveData();
-            if (data == "///CMD_Econnected")
+            SendData("///CMD_EconnectCHK"); //Sendet den Befehl zur Überprüfung der Verbindung des Emofängers an den Server
+            string data = ReceiveData(); //Die Antwort des Servers wird in einem string gespeichert
+            if (data == "///CMD_Econnected") //Wenn der Empfänger ein Signal sendet
             {
-                lblConnected.Text = "Verbindung stabil";
-                lblConnected.ForeColor = Color.Green;
-                pbConnected.Visible = true;
-                pbNotConnected.Visible = false;
+                lblConnected.Text = "Verbindung stabil"; //Text des Labels wird geändert
+                lblConnected.ForeColor = Color.Green; //Textfarbe des Labels wird grün gemacht
+                pbConnected.Visible = true; //Die grüne PictureBox wird sichtbar gemacht
+                pbNotConnected.Visible = false; //Die rote PictureBox wird unsichtbar gemacht
             }
-            else if (data == "///CMD_Edisconnected")
+            else if (data == "///CMD_Edisconnected") //Wenn der Empfänger kein Signal sendet
             {
-                lblConnected.Text = "Verbindung getrennt";
-                lblConnected.ForeColor = Color.Red;
-                pbConnected.Visible = false;
-                pbNotConnected.Visible = true;
+                lblConnected.Text = "Verbindung getrennt"; //Text des Labels wird geändert
+                lblConnected.ForeColor = Color.Red; //Textfarbe des Labels wird rot gemacht
+                pbConnected.Visible = false; //Die grüne PictureBox wird unsichtbar gemacht
+                pbNotConnected.Visible = true; //Die rote PictureBox wird sichtbar gemacht
             }
         }
 
@@ -199,29 +198,103 @@ namespace ProjektKS
 
         private void btnUploadFile_Click(object sender, EventArgs e)
         {
-            SendData("///CMD_RC_FILE");
-            Thread.Sleep(100);
-            long filesize = new System.IO.FileInfo(UploadFileSelector.FileName).Length;
-            SendData(filesize.ToString());
-            Thread.Sleep(100);
-            SendData(UploadFileSelector.SafeFileName);
-            ConnectFileSock();
-            FileSock.SendFile(UploadFileSelector.FileName);
-            FileSock.Close();
+            SendData("///CMD_RC_FILE"); //Sendet den Befehl zum Empfangen einer Datei an den Server
+            Thread.Sleep(100); //100ms Auszeit, um Datenkollision zu verhindern und damit der Server die einzelnen Elemente erkennen kann
+            long filesize = new System.IO.FileInfo(UploadFileSelector.FileName).Length; //Die größe der Datei wird in einem Long-Integer gespeichert, sodass auch größere Dateien übertragen werden können
+            SendData(filesize.ToString()); //Die größe der Datei wird an den Server gesendet
+            Thread.Sleep(100); //100ms Auszeit
+            SendData(UploadFileSelector.SafeFileName); //Der Name der Datei wird an den Server übergeben
+            ConnectFileSock(); //Ruft die Funktion auf, die den FileSocket verbindet
+            FileSock.SendFile(UploadFileSelector.FileName); //Die eigentliche Datei wird übertragen
+            FileSock.Close(); //Der FileSocket wird geschlossen
         }
 
         private void btnSelFile_Click(object sender, EventArgs e)
         {
-            UploadFileSelector.ShowDialog();
-            txtUploadFile.Text = UploadFileSelector.FileName;
+            UploadFileSelector.ShowDialog(); //öffnet einen normalen Fileselector 
+            txtUploadFile.Text = UploadFileSelector.FileName; 
         }
         private void ConnectFileSock()
         {
-            IPHostEntry host = Dns.GetHostEntry(SrvIP);
-            IPAddress ipAddress = host.AddressList[0];
-            IPEndPoint remoteEP = new IPEndPoint(ipAddress, 11002);
-            FileSock = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-            FileSock.Connect(remoteEP);
+            IPHostEntry host = Dns.GetHostEntry(SrvIP); //Server IP wird als IPHostEntry deklariert
+            IPAddress ipAddress = host.AddressList[0]; //Server IP wird nun als IPAdresse gespeichert
+            IPEndPoint remoteEP = new IPEndPoint(ipAddress, 11002); //IP-Endpoint mit der IPAdresse und dem Port erstellen
+            FileSock = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp); //Neuen Filesocket erstellen
+            FileSock.Connect(remoteEP); //Der Filesocket verbindet sich  
+        }
+        private void ReceiveFile()
+        {
+            long filesize = Convert.ToInt64(ReceiveData());
+            string filename = ReceiveData();
+            ConnectFileSock();
+            var file = new List<byte>();
+            byte[] buffer;
+            do
+            {
+                buffer = new byte[1];
+                FileSock.Receive(buffer);
+                file.AddRange(buffer);
+            } while (file.Count != filesize);
+
+            byte[] rcbytes = file.ToArray();
+            string savepath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\" + filename;
+            File.WriteAllBytes(savepath, rcbytes);
+        }
+        private void Ordner_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            SendData("///CMD_CD"); //Sendet den Befehl um alle Dateien innerhalb des ausgewählten Ordners anzuzeigen
+            SendData(Ordner.SelectedItem.ToString()); //Übergibt den Namen des gewünschten Odners
+            GetFolderList();
+            GetDataList(); //Öffnet die Funktion, die die Dateien in eine Listbox schreibt
+        }
+
+        bool rowdl = true; //Reihenfolge, genau das selbe Prinzip wie bei den Spielen
+        private void btnDownloadFile_Click(object sender, EventArgs e)
+        {
+            if(rowdl == true) 
+            {
+                SendData("///CMD_DL_FILE"); //Sendet Anfrage an Server um Ordner auf den Desktop anzusehen
+                btnDownloadFile.Text = "Ordner anzeigen"; //Text des Knopfes ändern
+                Ordner.Visible = true; //Ordner Listbox sichtbar machen
+                Dateien.Visible = true; //Dateien Listbox sichtbar machen
+                rowdl = false; //Reihenfolge auf falsch setzen
+                GetFolderList(); //Ruft die Funktion 
+                GetDataList();
+            }
+            else
+            {
+                btnDownloadFile.Text = "Ordner verstecken"; //Text des Knopfes ändern
+                Ordner.Visible = false; //Ordner Listbox unsichtbar machen
+                Dateien.Visible = false; //Dateien Listbox unsichtbar machen
+                rowdl = true; //Reihenfolge auf true setzen
+            }
+        }
+        private void GetFolderList()
+        {
+            Ordner.Items.Clear(); //Leert die Listbox, in der die Ordner stehen
+            var FolderCount = ReceiveData(); //Speichert die Anzahl der Ordner
+            int FolderCountInt = Convert.ToInt16(FolderCount);
+            for (int i = 1; i <= FolderCountInt; i++) //Führt eine Loop aus, die so lange durchzählt, bis i größer oder gleichgroß wie die Anzahl der Ordner ist
+            {
+                Ordner.Items.Add(ReceiveData()); //Schreibt die Ordner in die Listbox
+            }
+        }
+        private void GetDataList()
+        {
+            Dateien.Items.Clear(); //Leert die Listbox, in der die Dateien stehen
+            var DataCount = ReceiveData(); //Speichert die Anzahl der Dateien
+            int DataCountInt = Convert.ToInt16(DataCount);
+            for (int i = 1; i <= DataCountInt; i++) //Führt eine Loop aus, die so lange durchzählt, bis i größer oder gleichgroß wie die Anzahl der Dateien ist
+            {
+                Dateien.Items.Add(ReceiveData()); //Schreibt die Dateinamen in die Listbox
+            }
+        }
+
+        private void Dateien_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            SendData("///CMD_RC_FILE");
+            SendData(Dateien.SelectedItem.ToString());
+
         }
     }
 }
