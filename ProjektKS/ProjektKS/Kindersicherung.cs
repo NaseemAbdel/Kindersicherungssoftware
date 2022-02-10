@@ -292,9 +292,14 @@ namespace ProjektKS
 
         private void Dateien_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            SendData("///CMD_RC_FILE");
+            tmrCHKConnection.Stop();
+            SendData("///CMD_RC_FILE2");
             SendData(Dateien.SelectedItem.ToString());
-
+            if(ReceiveData() == "///CMD_READY")
+            {
+                ReceiveFile();
+            }
+            tmrCHKConnection.Start();
         }
     }
 }

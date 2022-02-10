@@ -101,6 +101,10 @@ namespace Server
                     {
                         FileToEmpfänger();
                     }
+                    else if (data == "///CMD_RC_FILE2")
+                    {
+                        FileToSender();
+                    }
                     else if (data == "///CMD_EconnectCHK")
                     {
                         if (Econnected == false)
@@ -309,8 +313,9 @@ namespace Server
         }
         private void FileToSender()
         {
+            string filename = ReceiveData(sock2);
             long filesize = Convert.ToInt64(ReceiveData(sock));
-            string filename = ReceiveData(sock);
+            
             Console.WriteLine("Creating Socket");
             if (FileSockInit == true)
             {
@@ -333,7 +338,7 @@ namespace Server
 
 
             FileSock.Close();
-            SendData(sock2, "///CMD_RC_FILE");
+            SendData(sock2, "///CMD_RC_FILE2");
             Thread.Sleep(100);
             SendData(sock2, filesize.ToString());
             Thread.Sleep(100);
