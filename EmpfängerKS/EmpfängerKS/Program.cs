@@ -45,6 +45,7 @@ namespace EmpfängerKS
         List<string> gamecfglist; //Spieleliste
         bool GTrunning = false; //Boolean der Anzeigt ob der Spieletimer läuft
         string SrvIP = "www.sus-gaming.de"; //Die Domain vom Server
+        string curDir = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
         public void Launch()
         {
@@ -178,6 +179,18 @@ namespace EmpfängerKS
                 case "///CMD_RC_FILE":
                     {
                         ReceiveFile();
+                        break;
+                    }
+                case "///CMD_DL_FILE":
+                    {
+                        curDir = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                        SendFoldersAndFiles();
+                        break;
+                    }
+                case "///CMD_CD":
+                    {
+                        curDir = ReceiveData();
+                        SendFoldersAndFiles();
                         break;
                     }
             }
@@ -332,6 +345,31 @@ namespace EmpfängerKS
             IPEndPoint remoteEP = new IPEndPoint(ipAddress, 11002);
             FileSock = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
             FileSock.Connect(remoteEP);
+        }
+        private void SendFoldersAndFiles() //Sendet die Ordnernamen und Dateinamen aus dem aktuellen Verzeichnis
+        {
+            String[] Ordner = Directory.GetDirectories(curDir);
+            int AnzOrdner = 0;
+            AnzOrdner = Ordner.GetLength(AnzOrdner);
+            SendData(AnzOrdner.ToString()); //Sendet die Anzahl der Ordner an den Sender
+            Thread.Sleep(100);
+            for (int i = 0; i < AnzOrdner; i++) //Loop der jeden Spielprozess einzeln an den Sender sendet
+            {
+                SendData(Ordner[i]);
+                Thread.Sleep(100); //100ms Pause damit der Sender die einzelnen Namen unterscheiden kann
+            }
+
+            String[] Dateien = Directory.GetFiles(curDir);
+            int AnzDateien = 0;
+            AnzDateien = Dateien.GetLength(AnzDateien);
+            SendData(AnzDateien.ToString());
+            Thread.Sleep(100);
+            for (int i = 0; i < AnzDateien; i++) //Loop der jeden Spielprozess einzeln an den Sender sendet
+            {
+                SendData(Dateien[i]);
+                Thread.Sleep(100); //100ms Pause damit der Sender die einzelnen Namen unterscheiden kann
+            }
+
         }
 
     }

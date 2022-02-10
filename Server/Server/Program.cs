@@ -27,23 +27,23 @@ namespace Server
     }
     class Fkts
     {
-        public System.Timers.Timer scchkTimer = new System.Timers.Timer();
-        public System.Timers.Timer ecchkTimer = new System.Timers.Timer();
-        public BackgroundWorker EFW = new BackgroundWorker();
-        public BackgroundWorker SFW = new BackgroundWorker();
-        public BackgroundWorker ESock = new BackgroundWorker();
-        public BackgroundWorker SSock = new BackgroundWorker();
-        public bool Econnected = false;
+        public System.Timers.Timer scchkTimer = new System.Timers.Timer(); //Timer der auf Verbindungsunterbrechungen des Senders überprüft
+        public System.Timers.Timer ecchkTimer = new System.Timers.Timer(); //Timer der auf Verbindungsunterbrechungen des Empfängers überprüft
+        public BackgroundWorker EFW = new BackgroundWorker(); //Background-Thread zum Weiterleitung von Strings vom Empfänger zum Sender
+        public BackgroundWorker SFW = new BackgroundWorker(); //Background-Thread zum Weiterleitung von Strings vom Sender zum Empfänger
+        public BackgroundWorker ESock = new BackgroundWorker(); //Background-Thread der den Socket für den Empfänger erstellt
+        public BackgroundWorker SSock = new BackgroundWorker(); //Background-Thread der den Socket für den Sender erstellt
+        public bool Econnected = false; //Boolean der angibt ob der Empfänger verbunden ist
          
         
-        Socket sock;
-        Socket listensock;
-        Socket sock2;
-        Socket listensock2;
-        Socket FileSock;
-        Socket listenfilesock;
-        string SrvIP = "192.168.178.122";
-        bool FileSockInit = false;
+        Socket sock; //Socket für den Empfänger
+        Socket listensock; //Temporärer Socket der auf Verbindung vom Empfänger wartet
+        Socket sock2; //Socket für den Sender
+        Socket listensock2; //Temporärer Socket der auf Verbindung vom Sender wartet
+        Socket FileSock; //Socket für Dateienübertragung
+        Socket listenfilesock; //Temporärer Socket der auf Verbindung vom Empfänger bzw. Sender wartet
+        string SrvIP = "192.168.178.122"; //Die IP des Raspberrys in meinem Netzwerk
+        bool FileSockInit = false; //Boolean der angibt ob der Socket für die Dateiübertragung bereits erstellt wurde
 
         public void Launch()
         {
@@ -51,7 +51,7 @@ namespace Server
             ESock.RunWorkerAsync();
             SSock.RunWorkerAsync();
         }
-        public void InitThreads()
+        public void InitThreads() //Stellt die Threads und Timer ein
         {
             this.EFW.DoWork +=
                 new DoWorkEventHandler(EFW_DoWork);
@@ -306,6 +306,46 @@ namespace Server
             FileSock.Close();
             Console.WriteLine("Transfer Complete");
             
+        }
+        private void FileToSender()
+        {
+            long filesize = Convert.ToInt64(ReceiveData(sock));
+            string filename = ReceiveData(sock);
+            Console.WriteLine("Creating Socket");
+            if (FileSockInit == true)
+            {
+                ReconnectFileSock();
+            }
+            else
+            {
+                CreateFileSock();
+            }
+
+            Console.WriteLine("Receiving Bytes");
+            var file = new List<byte>();
+            byte[] buffer;
+            do
+            {
+                buffer = new byte[1];
+                FileSock.Receive(buffer);
+                file.AddRange(buffer);
+            } while (file.Count != filesize);
+
+
+            FileSock.Close();
+            SendData(sock2, "///CMD_RC_FILE");
+            Thread.Sleep(100);
+            SendData(sock2, filesize.ToString());
+            Thread.Sleep(100);
+            SendData(sock2, filename);
+            Console.WriteLine("Reconnecting Socket");
+            ReconnectFileSock();
+            Console.WriteLine("Sending Bytes");
+            byte[] sndbyte = file.ToArray();
+            FileSock.Send(sndbyte);
+            FileSock.Close();
+            Console.WriteLine("Transfer Complete");
+
         }
         private void CreateFileSock()
         {
