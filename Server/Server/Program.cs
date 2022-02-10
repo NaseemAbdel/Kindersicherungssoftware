@@ -314,8 +314,11 @@ namespace Server
         private void FileToSender()
         {
             string filename = ReceiveData(sock2);
+            SendData(sock, "///CMD_RC_FILE2");
+            Thread.Sleep(100);
+            SendData(sock, filename);
             long filesize = Convert.ToInt64(ReceiveData(sock));
-            
+            string sfilename = ReceiveData(sock);
             Console.WriteLine("Creating Socket");
             if (FileSockInit == true)
             {
@@ -338,11 +341,11 @@ namespace Server
 
 
             FileSock.Close();
-            SendData(sock2, "///CMD_RC_FILE2");
+            SendData(sock2, "///CMD_READY");
             Thread.Sleep(100);
             SendData(sock2, filesize.ToString());
             Thread.Sleep(100);
-            SendData(sock2, filename);
+            SendData(sock2, sfilename);
             Console.WriteLine("Reconnecting Socket");
             ReconnectFileSock();
             Console.WriteLine("Sending Bytes");
