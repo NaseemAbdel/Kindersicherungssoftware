@@ -67,7 +67,7 @@ namespace Server
             ecchkTimer.Interval = 3000;
         }
 
-        private void EFW_DoWork(object sender, DoWorkEventArgs e)
+        private void EFW_DoWork(object sender, DoWorkEventArgs e) //Leitet Strings vom Empfänger an den Sender
         {
             do
             {
@@ -86,7 +86,7 @@ namespace Server
                 }
             } while (true);
         }
-        private void SFW_DoWork(object sender, DoWorkEventArgs e)
+        private void SFW_DoWork(object sender, DoWorkEventArgs e) //Verarbeitet die vom Sender geschickten Befehle, bzw. sendet sie an den Empfänger weiter
         {
             do
             {
@@ -131,67 +131,67 @@ namespace Server
         }
         private void ESock_DoWork(object sender, DoWorkEventArgs e)
         { 
-            IPHostEntry host = Dns.GetHostEntry(SrvIP);
-            IPAddress ipAddress = host.AddressList[0];
-            IPEndPoint remoteEP = new IPEndPoint(ipAddress, 11000);
-            listensock = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-            listensock.Bind(remoteEP);
-            listensock.Listen(1);
+            IPHostEntry host = Dns.GetHostEntry(SrvIP); //Server IP wird als IPHostEntry deklariert
+            IPAddress ipAddress = host.AddressList[0]; //Server IP wird nun als IPAdresse gespeichert
+            IPEndPoint remoteEP = new IPEndPoint(ipAddress, 11000); //IP-Endpoint mit der IPAdresse und dem Port erstellen
+            listensock = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp); //Neuen Socket erstellen
+            listensock.Bind(remoteEP); //Verbindet den Endpunkt mit dem temporären Socket
+            listensock.Listen(1); //Warte auf Verbindung
             sock = listensock.Accept();
-            Console.WriteLine("Empfänger verbunden");
+            Console.WriteLine("Empfänger verbunden"); //Um zu in der Console zu sehen was der Server macht
             ecchkTimer.Start();
             Econnected = true;
             EFW.RunWorkerAsync();
         }
         private void SSock_DoWork(object sender, DoWorkEventArgs e)
         {
-            IPHostEntry host = Dns.GetHostEntry(SrvIP);
-            IPAddress ipAddress = host.AddressList[0];
-            IPEndPoint remoteEP = new IPEndPoint(ipAddress, 11001);
-            listensock2 = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-            listensock2.Bind(remoteEP);
-            listensock2.Listen(1);
+            IPHostEntry host = Dns.GetHostEntry(SrvIP); //Server IP wird als IPHostEntry deklariert
+            IPAddress ipAddress = host.AddressList[0]; //Server IP wird nun als IPAdresse gespeichert
+            IPEndPoint remoteEP = new IPEndPoint(ipAddress, 11001); //IP-Endpoint mit der IPAdresse und dem Port erstellen
+            listensock2 = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp); //Neuen Socket erstellen
+            listensock2.Bind(remoteEP); //Verbindet den Endpunkt mit dem temporären Socket
+            listensock2.Listen(1); //Warte auf Verbindung
             sock2 = listensock2.Accept();
-            Console.WriteLine("Sender verbunden");
+            Console.WriteLine("Sender verbunden"); //Um zu in der Console zu sehen was der Server macht
             ChkPW();
         }
         private void SSockReconnect()
         {
-            listensock2.Listen(1);
+            listensock2.Listen(1); //Warte auf Verbindung
             sock2 = listensock2.Accept();
-            Console.WriteLine("Sender verbunden");
+            Console.WriteLine("Sender verbunden"); //Um zu in der Console zu sehen was der Server macht
             ChkPW();
         }
         private void ESockReconnect()
         {
-            listensock.Listen(1);
+            listensock.Listen(1); //Warte auf Verbindung
             sock = listensock.Accept();
-            Console.WriteLine("Empfänger verbunden");
+            Console.WriteLine("Empfänger verbunden"); //Um zu in der Console zu sehen was der Server macht
             ecchkTimer.Start();
             Econnected = true;
             EFW.RunWorkerAsync();
         }
-        private void ChkPW()
+        private void ChkPW() //Funktion um die Anmeldedaten zu überprüfen
         {
             
             int trycount = 0;
             bool auth = false;
             string username = "Eltern";
-            string password = "fktkacken";
+            string password = "fktpasswort";
             scchkTimer.Start();
             do
                 {
                     string receivedUN = ReceiveData(sock2);
                     string receivedPW = ReceiveData(sock2);
                 
-                if (receivedUN == "" || receivedPW == "")
+                if (receivedUN == "" || receivedPW == "") //Wenn das eingegebene Passwort und Nutzername leer ist
                 {
                     Console.WriteLine("Operation 4 fehlgeschlagen");
                     Console.WriteLine("Verbindung zum Sender getrennt");
                     SSockReconnect();
                     return;
                 }
-                    if (username == receivedUN && password == receivedPW)
+                    if (username == receivedUN && password == receivedPW)  //Wenn die LogIn-Daten übereinstimmen
                     {
                         SendData(sock2, "///CMD_AUTH_SUCCESSFUL");
                         Console.WriteLine("Sender authentifiziert");
@@ -220,15 +220,15 @@ namespace Server
             }
             
         
-        private string ReceiveData(Socket rcsocket)
+        private string ReceiveData(Socket rcsocket) //Funktion für das Empfangen von Daten
         {
             try
             {
                 string data = null;
                 byte[] bs = null;
-                bs = new byte[1024];
-                int bsint = rcsocket.Receive(bs);
-                data += Encoding.ASCII.GetString(bs, 0, bsint);
+                bs = new byte[1024]; //Neues Byte-Array mit einer größe von 1024 Bytes
+                int bsint = rcsocket.Receive(bs); //Anzahl der Bytes werden in einem Integer gespeichert
+                data += Encoding.ASCII.GetString(bs, 0, bsint); //Die Bytes werden zu einem String decodiert
                 return data;
             }
             catch
@@ -237,12 +237,12 @@ namespace Server
                 return "";
             }
         }
-        private void SendData(Socket sndsocket, string data)
+        private void SendData(Socket sndsocket, string data) //Funktion für das Senden von Daten
         {
             try
             {
-                byte[] databytes = Encoding.ASCII.GetBytes(data);
-                sndsocket.Send(databytes);
+                byte[] databytes = Encoding.ASCII.GetBytes(data); //Der übergebene String wird in Bytes konvertiert und in ein Byte-Array geschrieben
+                sndsocket.Send(databytes); //Das Byte-Array wird an den Sender gesendet
             }
             catch
             {
@@ -250,9 +250,9 @@ namespace Server
                
             }
         }
-        private void scchk(object source, ElapsedEventArgs e)
+        private void scchk(object source, ElapsedEventArgs e) //Timergesteuerte Funktion die getrennte Verbindungen wiederherstellt
         {
-            if (sock2.Connected == false)
+            if (sock2.Connected == false) //Falls Verbindung zum Sender getrennt wurde, warte auf neue Verbindung
             {
                 Console.WriteLine("Verbindung zum Sender getrennt");
                 scchkTimer.Stop();
@@ -260,7 +260,7 @@ namespace Server
             }
             
         }
-        private void ecchk(object source, ElapsedEventArgs e)
+        private void ecchk(object source, ElapsedEventArgs e) //Das gleiche wie scchk, bloß für den Empfänger
         {
             if (sock.Connected == false)
             {
@@ -271,12 +271,12 @@ namespace Server
             }
 
         }
-        private void FileToEmpfänger()
+        private void FileToEmpfänger() //Sendet Dateien zum Empfänger
         {
-            long filesize = Convert.ToInt64(ReceiveData(sock2));
-            string filename = ReceiveData(sock2);
+            long filesize = Convert.ToInt64(ReceiveData(sock2)); //Empfange Dateigröße
+            string filename = ReceiveData(sock2); //Empfange Dateinamen
             Console.WriteLine("Creating Socket");
-            if (FileSockInit == true)
+            if (FileSockInit == true) //Falls der FileSocket schon erstellt wurde, reconnecte es, ansonsten erstelle ein neues
             {
                 ReconnectFileSock();
             }
@@ -288,7 +288,7 @@ namespace Server
             Console.WriteLine("Receiving Bytes");
             var file = new List<byte>();
             byte[] buffer;
-                do
+                do //Loop der die Bytes der Datei einzeln in eine Byte-Liste einfügt, bis alle Bytes übertragen worden sind
                 {
                     buffer = new byte[1];
                     FileSock.Receive(buffer);
@@ -297,21 +297,21 @@ namespace Server
            
             
             FileSock.Close();
-            SendData(sock, "///CMD_RC_FILE");
+            SendData(sock, "///CMD_RC_FILE"); //Bereite Empfänger auf Dateiübertragung vor
             Thread.Sleep(100);
-            SendData(sock, filesize.ToString());
+            SendData(sock, filesize.ToString()); //Sende Dateigröße zum Empfänger
             Thread.Sleep(100);
-            SendData(sock, filename);
+            SendData(sock, filename); //Sende Dateinamen zum Empfänger
             Console.WriteLine("Reconnecting Socket");
             ReconnectFileSock();
             Console.WriteLine("Sending Bytes");
-            byte[] sndbyte = file.ToArray();
+            byte[] sndbyte = file.ToArray(); //Konvertiert Byte-Liste in ein sendbares Byte-Array
             FileSock.Send(sndbyte);
             FileSock.Close();
             Console.WriteLine("Transfer Complete");
             
         }
-        private void FileToSender()
+        private void FileToSender() //Das gleiche wie FileToEmpfänger bloß umgekehrt
         {
             string filename = ReceiveData(sock2);
             SendData(sock, "///CMD_RC_FILE2");
@@ -341,7 +341,7 @@ namespace Server
 
 
             FileSock.Close();
-            SendData(sock2, "///CMD_READY");
+            SendData(sock2, "///CMD_READY"); //Sage Sender, dass der Server bereit zum Übertragen ist
             Thread.Sleep(100);
             SendData(sock2, filesize.ToString());
             Thread.Sleep(100);
@@ -355,7 +355,7 @@ namespace Server
             Console.WriteLine("Transfer Complete");
 
         }
-        private void CreateFileSock()
+        private void CreateFileSock() //Erstellt ein Socket für die Dateiübertragung
         {
             FileSockInit = true;
             IPHostEntry host = Dns.GetHostEntry(SrvIP);
@@ -366,7 +366,7 @@ namespace Server
             listenfilesock.Listen(1);
             FileSock = listenfilesock.Accept();
         }
-        private void ReconnectFileSock()
+        private void ReconnectFileSock() //FileSocket wieder auf Listening stellen
         {
             listenfilesock.Listen(1);
             FileSock = listenfilesock.Accept();
