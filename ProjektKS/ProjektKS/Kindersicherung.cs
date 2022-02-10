@@ -208,7 +208,6 @@ namespace ProjektKS
             FileSock.SendFile(UploadFileSelector.FileName); //Die eigentliche Datei wird übertragen
             FileSock.Close(); //Der FileSocket wird geschlossen
         }
-
         private void btnSelFile_Click(object sender, EventArgs e)
         {
             UploadFileSelector.ShowDialog(); //öffnet einen normalen Fileselector 
@@ -289,17 +288,16 @@ namespace ProjektKS
                 Dateien.Items.Add(ReceiveData()); //Schreibt die Dateinamen in die Listbox
             }
         }
-
         private void Dateien_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            tmrCHKConnection.Stop();
-            SendData("///CMD_RC_FILE2");
-            SendData(Dateien.SelectedItem.ToString());
-            if(ReceiveData() == "///CMD_READY")
+            tmrCHKConnection.Stop();  //Beendet den Timer, der die Verbindung überprüft
+            SendData("///CMD_RC_FILE2"); //Sendet den Befehl zum Empfangen einer Datei an den Server
+            SendData(Dateien.SelectedItem.ToString()); //Konvertiert den Namen der ausgewählten Datei zu einem String und übergibt diesen an den Server
+            if(ReceiveData() == "///CMD_READY") //Wenn der Server bereit ist
             {
-                ReceiveFile();
+                ReceiveFile(); //Öffnet die Funktion, die die Datei empfängt
             }
-            tmrCHKConnection.Start();
+            tmrCHKConnection.Start(); //Startet den Timer, der die Verbindung überprüft
         }
     }
 }
