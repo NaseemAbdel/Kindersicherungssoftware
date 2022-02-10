@@ -63,7 +63,7 @@ namespace ProjektKS
             // txtName
             // 
             this.txtName.BackColor = System.Drawing.Color.Gray;
-            this.txtName.ForeColor = System.Drawing.Color.Red;
+            this.txtName.ForeColor = System.Drawing.Color.GhostWhite;
             this.txtName.Location = new System.Drawing.Point(294, 166);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(76, 20);
@@ -72,7 +72,7 @@ namespace ProjektKS
             // txtPasswort
             // 
             this.txtPasswort.BackColor = System.Drawing.Color.Gray;
-            this.txtPasswort.ForeColor = System.Drawing.Color.Red;
+            this.txtPasswort.ForeColor = System.Drawing.Color.GhostWhite;
             this.txtPasswort.Location = new System.Drawing.Point(294, 231);
             this.txtPasswort.Name = "txtPasswort";
             this.txtPasswort.Size = new System.Drawing.Size(76, 20);

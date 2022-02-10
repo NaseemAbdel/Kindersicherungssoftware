@@ -9,25 +9,25 @@
     ".NETFramework,Version=v4.7.2": []
   },
   "packageFolders": {
-    "C:\\Users\\benwi\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
+    "C:\\Users\\Tobi\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\benwi\\Documents\\Github\\Kindersicherungssoftware\\ProjektKS\\ProjektKS\\ProjektKS.csproj",
+      "projectUniqueName": "C:\\Users\\Tobi\\Desktop\\Kindersicherungssoftware\\ProjektKS\\ProjektKS\\ProjektKS.csproj",
       "projectName": "ProjektKS",
-      "projectPath": "C:\\Users\\benwi\\Documents\\Github\\Kindersicherungssoftware\\ProjektKS\\ProjektKS\\ProjektKS.csproj",
-      "packagesPath": "C:\\Users\\benwi\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\benwi\\Documents\\Github\\Kindersicherungssoftware\\ProjektKS\\ProjektKS\\obj\\",
+      "projectPath": "C:\\Users\\Tobi\\Desktop\\Kindersicherungssoftware\\ProjektKS\\ProjektKS\\ProjektKS.csproj",
+      "packagesPath": "C:\\Users\\Tobi\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Tobi\\Desktop\\Kindersicherungssoftware\\ProjektKS\\ProjektKS\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\"
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\benwi\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Users\\Tobi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net472"
@@ -38,6 +38,7 @@
       },
       "frameworks": {
         "net472": {
+          "targetAlias": "net472",
           "projectReferences": {}
         }
       },
@@ -49,7 +50,8 @@
     },
     "frameworks": {
       "net472": {
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+        "targetAlias": "net472",
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
       }
     },
     "runtimes": {

@@ -54,6 +54,9 @@ namespace ProjektKS
             this.btnBanGame = new System.Windows.Forms.Button();
             this.btnSelFile = new System.Windows.Forms.Button();
             this.UploadFileSelector = new System.Windows.Forms.OpenFileDialog();
+            this.btnDownloadFile = new System.Windows.Forms.Button();
+            this.Ordner = new System.Windows.Forms.ListBox();
+            this.Dateien = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbConnected)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbNotConnected)).BeginInit();
             this.SuspendLayout();
@@ -141,7 +144,7 @@ namespace ProjektKS
             // pbConnected
             // 
             this.pbConnected.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pbConnected.Image = global::ProjektKS.Properties.Resources.greencheck;
+            this.pbConnected.Image = ((System.Drawing.Image)(resources.GetObject("pbConnected.Image")));
             this.pbConnected.Location = new System.Drawing.Point(259, 60);
             this.pbConnected.Name = "pbConnected";
             this.pbConnected.Size = new System.Drawing.Size(160, 153);
@@ -153,8 +156,8 @@ namespace ProjektKS
             // lblConnected
             // 
             this.lblConnected.AutoSize = true;
-            this.lblConnected.ForeColor = System.Drawing.Color.Lime;
-            this.lblConnected.Location = new System.Drawing.Point(256, 216);
+            this.lblConnected.ForeColor = System.Drawing.Color.Red;
+            this.lblConnected.Location = new System.Drawing.Point(284, 216);
             this.lblConnected.Name = "lblConnected";
             this.lblConnected.Size = new System.Drawing.Size(173, 13);
             this.lblConnected.TabIndex = 9;
@@ -279,7 +282,8 @@ namespace ProjektKS
             // txtBanGame
             // 
             this.txtBanGame.BackColor = System.Drawing.Color.Gray;
-            this.txtBanGame.Location = new System.Drawing.Point(41, 328);
+            this.txtBanGame.ForeColor = System.Drawing.Color.Red;
+            this.txtBanGame.Location = new System.Drawing.Point(488, 151);
             this.txtBanGame.Name = "txtBanGame";
             this.txtBanGame.Size = new System.Drawing.Size(110, 20);
             this.txtBanGame.TabIndex = 21;
@@ -289,8 +293,8 @@ namespace ProjektKS
             // 
             this.btnBanGame.BackColor = System.Drawing.Color.Gray;
             this.btnBanGame.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnBanGame.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.btnBanGame.Location = new System.Drawing.Point(41, 354);
+            this.btnBanGame.ForeColor = System.Drawing.Color.Red;
+            this.btnBanGame.Location = new System.Drawing.Point(488, 177);
             this.btnBanGame.Name = "btnBanGame";
             this.btnBanGame.Size = new System.Drawing.Size(110, 20);
             this.btnBanGame.TabIndex = 22;
@@ -316,6 +320,49 @@ namespace ProjektKS
             // 
             this.UploadFileSelector.FileName = "openFileDialog1";
             // 
+            // btnDownloadFile
+            // 
+            this.btnDownloadFile.BackColor = System.Drawing.Color.Gray;
+            this.btnDownloadFile.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnDownloadFile.ForeColor = System.Drawing.Color.Red;
+            this.btnDownloadFile.Location = new System.Drawing.Point(271, 245);
+            this.btnDownloadFile.Name = "btnDownloadFile";
+            this.btnDownloadFile.Size = new System.Drawing.Size(137, 20);
+            this.btnDownloadFile.TabIndex = 26;
+            this.btnDownloadFile.Text = "Ordner anzeigen";
+            this.btnDownloadFile.UseVisualStyleBackColor = false;
+            this.btnDownloadFile.Click += new System.EventHandler(this.btnDownloadFile_Click);
+            // 
+            // Ordner
+            // 
+            this.Ordner.AccessibleName = "";
+            this.Ordner.BackColor = System.Drawing.Color.Gray;
+            this.Ordner.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.Ordner.ForeColor = System.Drawing.Color.Red;
+            this.Ordner.FormattingEnabled = true;
+            this.Ordner.Location = new System.Drawing.Point(173, 271);
+            this.Ordner.Name = "Ordner";
+            this.Ordner.Size = new System.Drawing.Size(171, 104);
+            this.Ordner.TabIndex = 27;
+            this.Ordner.Tag = "";
+            this.Ordner.Visible = false;
+            this.Ordner.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Ordner_MouseDoubleClick);
+            // 
+            // Dateien
+            // 
+            this.Dateien.AccessibleName = "";
+            this.Dateien.BackColor = System.Drawing.Color.Gray;
+            this.Dateien.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.Dateien.ForeColor = System.Drawing.Color.Red;
+            this.Dateien.FormattingEnabled = true;
+            this.Dateien.Location = new System.Drawing.Point(350, 271);
+            this.Dateien.Name = "Dateien";
+            this.Dateien.Size = new System.Drawing.Size(175, 104);
+            this.Dateien.TabIndex = 28;
+            this.Dateien.Tag = "";
+            this.Dateien.Visible = false;
+            this.Dateien.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Dateien_MouseDoubleClick);
+            // 
             // Kindersicherung
             // 
             this.AccessibleRole = System.Windows.Forms.AccessibleRole.ToolBar;
@@ -323,6 +370,9 @@ namespace ProjektKS
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(686, 390);
+            this.Controls.Add(this.Dateien);
+            this.Controls.Add(this.Ordner);
+            this.Controls.Add(this.btnDownloadFile);
             this.Controls.Add(this.btnSelFile);
             this.Controls.Add(this.btnBanGame);
             this.Controls.Add(this.txtBanGame);
@@ -381,5 +431,8 @@ namespace ProjektKS
         private System.Windows.Forms.Button btnBanGame;
         private System.Windows.Forms.Button btnSelFile;
         private System.Windows.Forms.OpenFileDialog UploadFileSelector;
+        private System.Windows.Forms.Button btnDownloadFile;
+        private System.Windows.Forms.ListBox Ordner;
+        private System.Windows.Forms.ListBox Dateien;
     }
 }
