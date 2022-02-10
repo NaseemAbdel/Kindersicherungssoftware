@@ -193,6 +193,11 @@ namespace EmpfängerKS
                         SendFoldersAndFiles();
                         break;
                     }
+                case "///CMD_RC_FILE2":
+                    {
+                        SendFile();
+                        break;
+                    }
             }
 
         }
@@ -370,6 +375,19 @@ namespace EmpfängerKS
                 Thread.Sleep(100); //100ms Pause damit der Sender die einzelnen Namen unterscheiden kann
             }
 
+        }
+        private void SendFile()
+        {
+            string filename = ReceiveData();
+            long filesize = new System.IO.FileInfo(filename).Length;
+            SendData(filesize.ToString());
+            Thread.Sleep(100);
+            string sfilename = new System.IO.FileInfo(filename).Name;
+            SendData(sfilename);
+            Thread.Sleep(100);
+            ConnectFileSock();
+            FileSock.SendFile(filename);
+            FileSock.Close();
         }
 
     }
