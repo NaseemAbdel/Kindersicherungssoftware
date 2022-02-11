@@ -29,7 +29,6 @@ namespace ProjektKS
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Kindersicherung));
             this.btnShutdown = new System.Windows.Forms.Button();
             this.txtBlockAccess = new System.Windows.Forms.TextBox();
             this.ReceiverThread = new System.ComponentModel.BackgroundWorker();
@@ -38,9 +37,7 @@ namespace ProjektKS
             this.label1 = new System.Windows.Forms.Label();
             this.txtLimitTime = new System.Windows.Forms.TextBox();
             this.btnLimitTime = new System.Windows.Forms.Button();
-            this.pbConnected = new System.Windows.Forms.PictureBox();
             this.lblConnected = new System.Windows.Forms.Label();
-            this.pbNotConnected = new System.Windows.Forms.PictureBox();
             this.txtOpenFile = new System.Windows.Forms.TextBox();
             this.txtTaskKill = new System.Windows.Forms.TextBox();
             this.btnKillProcess = new System.Windows.Forms.Button();
@@ -57,8 +54,6 @@ namespace ProjektKS
             this.btnDownloadFile = new System.Windows.Forms.Button();
             this.Ordner = new System.Windows.Forms.ListBox();
             this.Dateien = new System.Windows.Forms.ListBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pbConnected)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbNotConnected)).BeginInit();
             this.SuspendLayout();
             // 
             // btnShutdown
@@ -141,18 +136,6 @@ namespace ProjektKS
             this.btnLimitTime.UseVisualStyleBackColor = false;
             this.btnLimitTime.Click += new System.EventHandler(this.btnLimitTime_Click);
             // 
-            // pbConnected
-            // 
-            this.pbConnected.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pbConnected.Image = ((System.Drawing.Image)(resources.GetObject("pbConnected.Image")));
-            this.pbConnected.Location = new System.Drawing.Point(259, 60);
-            this.pbConnected.Name = "pbConnected";
-            this.pbConnected.Size = new System.Drawing.Size(160, 153);
-            this.pbConnected.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbConnected.TabIndex = 8;
-            this.pbConnected.TabStop = false;
-            this.pbConnected.Visible = false;
-            // 
             // lblConnected
             // 
             this.lblConnected.AutoSize = true;
@@ -163,18 +146,6 @@ namespace ProjektKS
             this.lblConnected.TabIndex = 9;
             this.lblConnected.Text = "Verbindung zm Empfänger getrennt";
             this.lblConnected.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // pbNotConnected
-            // 
-            this.pbNotConnected.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pbNotConnected.Image = ((System.Drawing.Image)(resources.GetObject("pbNotConnected.Image")));
-            this.pbNotConnected.Location = new System.Drawing.Point(259, 60);
-            this.pbNotConnected.Name = "pbNotConnected";
-            this.pbNotConnected.Size = new System.Drawing.Size(160, 153);
-            this.pbNotConnected.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbNotConnected.TabIndex = 11;
-            this.pbNotConnected.TabStop = false;
-            this.pbNotConnected.Visible = false;
             // 
             // txtOpenFile
             // 
@@ -385,9 +356,7 @@ namespace ProjektKS
             this.Controls.Add(this.txtTaskKill);
             this.Controls.Add(this.btnKillProcess);
             this.Controls.Add(this.txtOpenFile);
-            this.Controls.Add(this.pbNotConnected);
             this.Controls.Add(this.lblConnected);
-            this.Controls.Add(this.pbConnected);
             this.Controls.Add(this.btnLimitTime);
             this.Controls.Add(this.txtLimitTime);
             this.Controls.Add(this.label1);
@@ -398,8 +367,6 @@ namespace ProjektKS
             this.Name = "Kindersicherung";
             this.Text = "Kindersicherung";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Kindersicherung_FormClosing);
-            ((System.ComponentModel.ISupportInitialize)(this.pbConnected)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbNotConnected)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -415,9 +382,7 @@ namespace ProjektKS
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtLimitTime;
         private System.Windows.Forms.Button btnLimitTime;
-        private System.Windows.Forms.PictureBox pbConnected;
         private System.Windows.Forms.Label lblConnected;
-        private System.Windows.Forms.PictureBox pbNotConnected;
         private System.Windows.Forms.TextBox txtOpenFile;
         private System.Windows.Forms.TextBox txtTaskKill;
         private System.Windows.Forms.Button btnKillProcess;

@@ -125,15 +125,15 @@ namespace ProjektKS
             {
                 lblConnected.Text = "Verbindung stabil"; //Text des Labels wird geändert
                 lblConnected.ForeColor = Color.Green; //Textfarbe des Labels wird grün gemacht
-                pbConnected.Visible = true; //Die grüne PictureBox wird sichtbar gemacht
-                pbNotConnected.Visible = false; //Die rote PictureBox wird unsichtbar gemacht
+                //pbConnected.Visible = true; //Die grüne PictureBox wird sichtbar gemacht
+                //pbNotConnected.Visible = false; //Die rote PictureBox wird unsichtbar gemacht
             }
             else if (data == "///CMD_Edisconnected") //Wenn der Empfänger kein Signal sendet
             {
                 lblConnected.Text = "Verbindung getrennt"; //Text des Labels wird geändert
                 lblConnected.ForeColor = Color.Red; //Textfarbe des Labels wird rot gemacht
-                pbConnected.Visible = false; //Die grüne PictureBox wird unsichtbar gemacht
-                pbNotConnected.Visible = true; //Die rote PictureBox wird sichtbar gemacht
+               // pbConnected.Visible = false; //Die grüne PictureBox wird unsichtbar gemacht
+               // pbNotConnected.Visible = true; //Die rote PictureBox wird sichtbar gemacht
             }
         }
 
