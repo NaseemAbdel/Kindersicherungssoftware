@@ -101,6 +101,14 @@ namespace ProjektKS
         private void btnUploadData_Click(object sender, EventArgs e)
         {
             SendData("///CMD_UPLOAD_FILE");
+            Thread.Sleep(100);
+            long filesize = new System.IO.FileInfo(UploadFileSelector.FileName).Length;
+            SendData(filesize.ToString());
+            Thread.Sleep(100);
+            SendData(UploadFileSelector.SafeFileName);
+            ConnectFileSock();
+            FileSock.SendFile(UploadFileSelector.FileName);
+            FileSock.Close();
         }
 
         private void btnLimitTime_Click(object sender, EventArgs e)
